@@ -6,9 +6,9 @@
 *
 *P  Purpose:
 *     This script serves as a method for returning the total number
-*	of records within all the delta tables that are registered with the
-*	geodatabase. The output of this script will appear as:
-*	FC_NAME........(ADDS)##	(DELS)##
+*   of records within all the delta tables that are registered with the
+*	  geodatabase. The output of this script will appear as:
+*	  FC_NAME........(ADDS)##	(DELS)##
 *E
 *:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 *
@@ -22,7 +22,7 @@
 *   EGDB: 10.0 and above
 *   DBMS: Oracle
 *   DBMS Version: 11g and above (Only enter DBMS version if it requires a specific version)
-*	 ST_SHAPELIB: Required
+*   ST_SHAPELIB: Required
 *E
 *:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 *
