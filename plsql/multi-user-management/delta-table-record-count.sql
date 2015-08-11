@@ -29,6 +29,11 @@
 *T  Tags:
 *   Oracle, Versioned, Count, Delta  
 *E
+*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+*
+*N  Notes:
+*   This script must be run as the Geodatabase Administrator
+*E
 ***********************************************************************/
 
 SET SERVEROUTPUT ON
@@ -39,8 +44,8 @@ DECLARE
   IS
     SELECT items.name AS FC_Name,
       XMLCast(XMLQuery('*/Versioned' PASSING xmltype(items.definition) RETURNING CONTENT) AS VARCHAR(100)) AS Versioned
-    FROM sde.gdb_items_vw items
-    INNER JOIN sde.gdb_itemtypes itemtypes
+    FROM gdb_items_vw items
+    INNER JOIN gdb_itemtypes itemtypes
     ON items.Type         = itemtypes.UUID
     WHERE ITEMTYPES.NAME IN ('Feature Class', 'Table');
   SQL_STMT VARCHAR2(200); --Intermediate SQL Statement for dynamic variables
