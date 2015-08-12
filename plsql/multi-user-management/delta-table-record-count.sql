@@ -62,7 +62,7 @@ BEGIN
       SELECT (t.owner
         || '.A'
         || t.registration_id)
-      INTO adds
+      INTO adds --Set "adds" variable to fully-qualifed adds table
       FROM table_registry t
       WHERE (t.owner
         || '.'
@@ -70,15 +70,16 @@ BEGIN
       SELECT (t.owner
         || '.D'
         || t.registration_id)
-      INTO dels
+      INTO dels --Set "dels" variable to the fully-qualified delete table
       FROM table_registry t
       WHERE (t.owner
         || '.'
         || T.TABLE_NAME) = UPPER(FC.FC_NAME);
       SQL_STMT          := 'select count(*) from ' || ADDS || '';
-      EXECUTE IMMEDIATE SQL_STMT INTO ACNT;
+      EXECUTE IMMEDIATE SQL_STMT INTO ACNT; --Set "ACNT" variable to the count of records in the adds table
       SQL_STMT := 'select count(*) from ' || DELS || '';
-      EXECUTE IMMEDIATE SQL_STMT INTO DCNT;
+      EXECUTE IMMEDIATE SQL_STMT INTO DCNT; --Set "DCNT" variable to the count of records in the delete table
+      --Print the output for each versioned feature class
       DBMS_OUTPUT.PUT_LINE(rpad(upper(fc.fc_name),64,'.') || '(ADDS)' || rpad(acnt,10) || ' (DELS)' || rpad(dcnt,10));
     END IF;
   END LOOP;
