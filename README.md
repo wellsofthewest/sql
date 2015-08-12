@@ -1,4 +1,4 @@
-# esri-support-sql-repository
+# geodatabse-sql-repository
 Common SQL scripts for use in an Enterprise Geodatabase (SDE) Environment.
 
 ##Conventions
