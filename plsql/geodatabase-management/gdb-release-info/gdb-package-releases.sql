@@ -19,8 +19,8 @@
 *
 *V  Versions Supported:
 *   EGDB: 10.0 and above
-*	  DBMS: Oracle
-*	  DBMS Version: All
+*   DBMS: Oracle
+*   DBMS Version: All
 *E
 *:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 *
