@@ -1,6 +1,6 @@
 /***********************************************************************
 *
-*N  orphaned-domains.SQL  --  List Esri Field Types
+*N  orphaned-domains.SQL  --  List Orphaned Domains
 *
 *:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 *
