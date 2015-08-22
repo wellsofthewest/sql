@@ -33,7 +33,7 @@
 *
 *R  Resources:
 *   XMLQUERY:
-*	  http://docs.oracle.com/cd/B19306_01/server.102/b14200/functions224.htm
+*   http://docs.oracle.com/cd/B19306_01/server.102/b14200/functions224.htm
 *E
 ***********************************************************************/
 
