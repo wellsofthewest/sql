@@ -19,8 +19,8 @@
 *
 *V  Versions Supported:
 *   EGDB: 10.0 and above
-*	  DBMS: Oracle
-*	  DBMS Version: All
+*   DBMS: Oracle
+*   DBMS Version: All
 *   ST_SHAPELIB: Required
 *E
 *:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -32,7 +32,7 @@
 *
 *R  Resources:
 *   XMLQUERY:
-*	  http://docs.oracle.com/cd/B19306_01/server.102/b14200/functions224.htm
+*   http://docs.oracle.com/cd/B19306_01/server.102/b14200/functions224.htm
 *E
 ***********************************************************************/
 
