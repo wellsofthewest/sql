@@ -5,9 +5,9 @@
 *:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 *
 *P  Purpose:
-*     This script serves as a series of steps to complete the import
-*   data pump process using the IMPDP utility. This script is meant to
-*   be run one step at a time.
+*     This script serves as a method for capturing the 10046 trace events
+*   that a user performs by starting a trace when they connect to the 
+*   database.
 *E
 *:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 *
