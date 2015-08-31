@@ -6,8 +6,8 @@
 *
 *P  Purpose:
 *     This script serves to describe feature classes within the GDB_ITEMS
-*	  table by listing the name and type of Esri field as this differs
-*	  from DBMS field types. Requires ST_SHAPELIB to be set up and working.
+*   table by listing the name and type of Esri field as this differs
+*   from DBMS field types. Requires ST_SHAPELIB to be set up and working.
 *E
 *:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 *
