@@ -1,38 +1,38 @@
 /***********************************************************************
-*
-*N  migrate-sdo-to-geom.sql  --  Migrate SDO to Geometry
-*
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*P  Purpose:
-*     This script serves as a method for converting SDO data to 
-*   Geometry in SQL Server via linked server. This script assumes that
-*   a function linked server is set up to Oracle.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*H  History:
-*
-*    Christian Wells        8/10/2015               Original coding.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*V  Versions Supported:
-*   EGDB: All
-*   DBMS: SQL Server
-*   DBMS Version: 2008 and above
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*T  Tags:
-*   SDO, SQL Server, Conversion, Migration, Geometry, WKB
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*R  Resources:
-*   OPENQUERY (Transact-SQL)  
-*   https://msdn.microsoft.com/en-us/library/ms188427.aspx
-*E
+
+migrate-sdo-to-geom.sql  --  Migrate SDO to Geometry
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Purpose:
+ This script serves as a method for converting SDO data to
+Geometry in SQL Server via linked server. This script assumes that
+a function linked server is set up to Oracle.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+History:
+
+Christian Wells        8/10/2015               Original coding.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Versions Supported:
+EGDB: All
+DBMS: SQL Server
+DBMS Version: 2008 and above
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Tags:
+SDO, SQL Server, Conversion, Migration, Geometry, WKB
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Resources:
+OPENQUERY (Transact-SQL)
+https://msdn.microsoft.com/en-us/library/ms188427.aspx
+
 ***********************************************************************/
 
 --Create a temporary table to hold the WKB from Oracle

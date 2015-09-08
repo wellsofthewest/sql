@@ -1,39 +1,39 @@
 /***********************************************************************
-*
-*N  delta-table-record-count.sql  --  Delta Table Record Count
-*
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*P  Purpose:
-*     This script serves as a method for returning the total number
-*   of records within all the delta tables that are registered with the
-*	  geodatabase. The output of this script will appear as:
-*	  FC_NAME........(ADDS)##	(DELS)##
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*H  History:
-*
-*    Christian Wells        07/03/2015               Original coding.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*V  Versions Supported:
-*   EGDB: 10.0 and above
-*   DBMS: Oracle
-*   DBMS Version: 11g and above (Only enter DBMS version if it requires a specific version)
-*   ST_SHAPELIB: Required
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*T  Tags:
-*   Oracle, Versioned, Count, Delta  
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*N  Notes:
-*   This script must be run as the Geodatabase Administrator
-*E
+
+delta-table-record-count.sql  --  Delta Table Record Count
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Purpose:
+ This script serves as a method for returning the total number
+of records within all the delta tables that are registered with the
+geodatabase. The output of this script will appear as:
+FC_NAME........(ADDS)##	(DELS)##
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+History:
+
+Christian Wells        07/03/2015               Original coding.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Versions Supported:
+EGDB: 10.0 and above
+DBMS: Oracle
+DBMS Version: 11g and above (Only enter DBMS version if it requires a specific version)
+ST_SHAPELIB: Required
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Tags:
+Oracle, Versioned, Count, Delta
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Notes:
+This script must be run as the Geodatabase Administrator
+
 ***********************************************************************/
 
 SET SERVEROUTPUT ON

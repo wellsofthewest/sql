@@ -1,41 +1,40 @@
-
 /***********************************************************************
-*
-*N  trace-session-dbms-system.SQL  --  Oracle DBMS Trace
-*
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*P  Purpose:
-*     This script serves to start tracing all events in a single
-*   session. One advantage to this script is the ability to set
-*   tracing on, while mid-session.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*H  History:
-*
-*    Christian Wells        07/01/2015               Original coding.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*V  Versions Supported:
-*   EGDB: All
-*   DBMS: Oracle
-*   DBMS Version: 11.2.0
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*T  Tags:
-*   10046, Trace, Oracle, DBMS_SYSTEM
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*R  Resources:
-*   http://docstore.mik.ua/orelly/oracle/bipack/ch11_02.htm
-*E
+
+trace-session-dbms-system.SQL  --  Oracle DBMS Trace
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Purpose:
+ This script serves to start tracing all events in a single
+session. One advantage to this script is the ability to set
+tracing on, while mid-session.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+History:
+
+Christian Wells        07/01/2015               Original coding.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Versions Supported:
+EGDB: All
+DBMS: Oracle
+DBMS Version: 11.2.0
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Tags:
+10046, Trace, Oracle, DBMS_SYSTEM
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Resources:
+http://docstore.mik.ua/orelly/oracle/bipack/ch11_02.htm
+
 ***********************************************************************/
 
---Oracle DBMS_SYSTEM Tracing Procedures 
+--Oracle DBMS_SYSTEM Tracing Procedures
 
 
 --Must be run as SYSDBA
@@ -46,7 +45,7 @@ COLUMN PROGRAM FORMAT A20
 
 --Select SID and SERIAL# value for the required user
 SELECT S.SID, S.SERIAL#, S.USERNAME, S.PROGRAM
-FROM V$PROCESS P JOIN V$SESSION S 
+FROM V$PROCESS P JOIN V$SESSION S
 ON P.ADDR = S.PADDR
 WHERE S.USERNAME = 'SDE';
 

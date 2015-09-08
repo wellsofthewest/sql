@@ -1,38 +1,38 @@
 /***********************************************************************
-*
-*N  IMPDP.SQL  --  Import Data Pump Steps
-*
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*P  Purpose:
-*     This script serves as a series of steps to complete the import
-*	data pump process using the IMPDP utility. This script is meant to
-*	be run one step at a time.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*H  History:
-*
-*    Christian Wells        11/03/2014               Original coding.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*V  Versions Supported:
-*   EGDB: All
-*   DBMS: Oracle
-*   DBMS Version: 11g and above 
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*T  Tags:
-*   IMPDP, Data Pump, Oracle, Import   
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*R  Resources:
-*   IMPDP Syntax:	
-*	  http://ss64.com/ora/impdp.html 
-*E
+
+IMPDP.SQL  --  Import Data Pump Steps
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Purpose:
+  This script serves as a series of steps to complete the import
+data pump process using the IMPDP utility. This script is meant to
+be run one step at a time.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+History:
+
+Christian Wells        11/03/2014               Original coding.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Versions Supported:
+EGDB: All
+DBMS: Oracle
+DBMS Version: 11g and above
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Tags:
+IMPDP, Data Pump, Oracle, Import
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Resources:
+IMPDP Syntax:
+http://ss64.com/ora/impdp.html
+
 ***********************************************************************/
 
 
@@ -54,8 +54,8 @@ GRANT EXECUTE ON utl_raw TO public;
 
 --4. Create all required tablespaces
 --Note this is a default tablespace to auto extend
-CREATE TABLESPACE SDE DATAFILE '/home/oracle/orcl/oradata/banner/sde.dbf' 
-SIZE 100M AUTOEXTEND ON NEXT 51200K MAXSIZE UNLIMITED EXTENT MANAGEMENT 
+CREATE TABLESPACE SDE DATAFILE '/home/oracle/orcl/oradata/banner/sde.dbf'
+SIZE 100M AUTOEXTEND ON NEXT 51200K MAXSIZE UNLIMITED EXTENT MANAGEMENT
 LOCAL UNIFORM SIZE 320K LOGGING ONLINE SEGMENT SPACE MANAGEMENT MANUAL;
 
 --5. Create the user/schema

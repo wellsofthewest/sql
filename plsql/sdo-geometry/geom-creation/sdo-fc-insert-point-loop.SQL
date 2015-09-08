@@ -1,37 +1,37 @@
 /***********************************************************************
-*
-*N  sdo-fc-insert-point-loop.SQL  --  Insert SDO points into feature class
-*
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*P  Purpose:
-*     This script serves to insert point data stored in one table into
-*   a registered feature class within an enterprise geodatabase.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*H  History:
-*
-*    Christian Wells        08/22/2015               Original coding.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*V  Versions Supported:
-*   EGDB: 10.0 and above
-*	  DBMS: Oracle
-*	  DBMS Version: All
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*T  Tags:
-*   Oracle, Feature Class, SDO, Insert, Point
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*R  Resources:
-*   Next_RowID:
-*	  http://desktop.arcgis.com/en/desktop/latest/manage-data/using-sql-with-gdbs/next-rowid.htm
-*E
+
+sdo-fc-insert-point-loop.SQL  --  Insert SDO points into feature class
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Purpose:
+ This script serves to insert point data stored in one table into
+a registered feature class within an enterprise geodatabase.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+History:
+
+Christian Wells        08/22/2015               Original coding.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Versions Supported:
+EGDB: 10.0 and above
+DBMS: Oracle
+DBMS Version: All
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Tags:
+Oracle, Feature Class, SDO, Insert, Point
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Resources:
+Next_RowID:
+http://desktop.arcgis.com/en/desktop/latest/manage-data/using-sql-with-gdbs/next-rowid.htm
+
 ***********************************************************************/
 --ORACLE SDO CURSOR
 

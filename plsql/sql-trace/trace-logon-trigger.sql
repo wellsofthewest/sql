@@ -1,38 +1,38 @@
 /***********************************************************************
-*
-*N  trace-logon-trigger.sql  --  Oracle DBMS Trace
-*
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*P  Purpose:
-*     This script serves as a method for capturing the 10046 trace events
-*   that a user performs by starting a trace when they connect to the 
-*   database.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*H  History:
-*
-*    Christian Wells        07/01/2015               Original coding.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*V  Versions Supported:
-*   EGDB: All
-*   DBMS: Oracle
-*   DBMS Version: All
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*T  Tags:
-*   10046, Trace, Oracle, Logon, Trigger   
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*R  Resources:
-*   Using Triggers:	
-*   https://docs.oracle.com/database/121/TDDDG/tdddg_triggers.htm#TDDDG50000
-*E
+
+trace-logon-trigger.sql  --  Oracle DBMS Trace
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Purpose:
+ This script serves as a method for capturing the 10046 trace events
+that a user performs by starting a trace when they connect to the
+database.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+History:
+
+Christian Wells        07/01/2015               Original coding.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Versions Supported:
+EGDB: All
+DBMS: Oracle
+DBMS Version: All
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Tags:
+10046, Trace, Oracle, Logon, Trigger
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Resources:
+Using Triggers:
+https://docs.oracle.com/database/121/TDDDG/tdddg_triggers.htm#TDDDG50000
+
 ***********************************************************************/
 
 
@@ -57,7 +57,7 @@ drop trigger sde_logon;
 
 /*
 
-NOTES: 
+NOTES:
 -If the session is not ended, the trace will continue running even if the trigger is dropped
 
 */

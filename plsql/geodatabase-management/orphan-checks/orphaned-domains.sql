@@ -1,40 +1,40 @@
 /***********************************************************************
-*
-*N  orphaned-domains.SQL  --  List Orphaned Domains
-*
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*P  Purpose:
-*     This script serves to describe feature class fields within the 
-*   GDB_ITEMS table. If the field has a domain specified, the query
-*   will check if the domain still exists in the geodatabase. If the
-*   domain does not exist in the geodatabase the feature class, field
-*   and domain name are returned.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*H  History:
-*
-*    Christian Wells        08/22/2015               Original coding.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*V  Versions Supported:
-*   EGDB: 10.0 and above
-*	  DBMS: Oracle
-*	  DBMS Version: All
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*T  Tags:
-*   XML, Fields, Oracle, Feature Class, Domain, Orphan
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*R  Resources:
-*   XMLQUERY:
-*   http://docs.oracle.com/cd/B19306_01/server.102/b14200/functions224.htm
-*E
+
+orphaned-domains.SQL  --  List Orphaned Domains
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Purpose:
+ This script serves to describe feature class fields within the
+GDB_ITEMS table. If the field has a domain specified, the query
+will check if the domain still exists in the geodatabase. If the
+domain does not exist in the geodatabase the feature class, field
+and domain name are returned.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+History:
+
+Christian Wells        08/22/2015               Original coding.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Versions Supported:
+EGDB: 10.0 and above
+DBMS: Oracle
+DBMS Version: All
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Tags:
+XML, Fields, Oracle, Feature Class, Domain, Orphan
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Resources:
+XMLQUERY:
+http://docs.oracle.com/cd/B19306_01/server.102/b14200/functions224.htm
+
 ***********************************************************************/
 
 SELECT items.physicalname,
@@ -47,16 +47,16 @@ FROM sde.gdb_items_vw items,
 for $f in $i/GPFieldInfoEx
 return
 <Info nm="{$f/Name}" fDomain="{$f/DomainName}"/>' PASSING xmltype(items.definition) RETURNING CONTENT)) COLUMNS FName VARCHAR(30) PATH '@nm', FTYPE VARCHAR(30) PATH '@fDomain') XMLTBL
-WHERE 
+WHERE
   --Only return feature classes and tables that are registered with the geodatabase.
   ITEMS.TYPE IN ('{70737809-852C-4A03-9E22-2CECEA5B9BFA}', '{CD06BC3B-789D-4C51-AAFA-A467912B8965}')
-AND 
+AND
   --Check to see if the domain from the XML query exists in the geodatabase.
   XMLTBL.FTYPE NOT IN
   (SELECT NAME
   FROM GDB_ITEMS
   WHERE TYPE IN ('{8C368B12-A12E-4C7E-9638-C9C64E69E98F}', '{C29DA988-8C3E-45F7-8B5C-18E51EE7BEB4}')
   )
-AND 
+AND
   --Do not return any fields that do not have a domain.
   XMLTBL.FTYPE IS NOT NULL

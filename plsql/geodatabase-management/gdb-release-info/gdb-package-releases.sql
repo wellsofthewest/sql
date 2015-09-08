@@ -1,32 +1,32 @@
 /***********************************************************************
-*
-*N  gdb-package-releases.SQL  --  List individual releases of gdb packages
-*
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*P  Purpose:
-*     This script serves to list the packages within an enterprise
-*   geodatabase. Best used for comparing geodatabases to see if they
-*   are at the same release.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*H  History:
-*
-*    Christian Wells        08/22/2015               Original coding.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*V  Versions Supported:
-*   EGDB: 10.0 and above
-*   DBMS: Oracle
-*   DBMS Version: All
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*T  Tags:
-*   Oracle, Packages, Release
-*E
+
+gdb-package-releases.SQL  --  List individual releases of gdb packages
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Purpose:
+ This script serves to list the packages within an enterprise
+geodatabase. Best used for comparing geodatabases to see if they
+are at the same release.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+History:
+
+Christian Wells        08/22/2015               Original coding.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Versions Supported:
+EGDB: 10.0 and above
+DBMS: Oracle
+DBMS Version: All
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Tags:
+Oracle, Packages, Release
+
 ***********************************************************************/
 
 SET serveroutput ON

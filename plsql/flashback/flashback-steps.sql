@@ -1,37 +1,37 @@
 /***********************************************************************
-*
-*N  flashback-steps.sql  --  Steps for creating and restoring flashbacks
-*
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*P  Purpose:
-*     This script serves as a list of steps for creating a flashback
-*   and then restoring to that point.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*H  History:
-*
-*    Christian Wells        07/27/2015               Original coding.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*V  Versions Supported:
-*   EGDB: All
-*   DBMS: Oracle
-*   DBMS Version: 11g and above (Only enter DBMS version if it requires a specific version)
-*   ST_SHAPELIB: No requirement
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*T  Tags:
-*   Oracle, Flashback  
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*N  Notes:
-*   This script must be run with privileges to the SDE repository.
-*E
+
+flashback-steps.sql  --  Steps for creating and restoring flashbacks
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Purpose:
+ This script serves as a list of steps for creating a flashback
+and then restoring to that point.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+History:
+
+Christian Wells        07/27/2015               Original coding.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Versions Supported:
+EGDB: All
+DBMS: Oracle
+DBMS Version: 11g and above (Only enter DBMS version if it requires a specific version)
+ST_SHAPELIB: No requirement
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Tags:
+Oracle, Flashback
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Notes:
+This script must be run with privileges to the SDE repository.
+
 ***********************************************************************/
 
 /*

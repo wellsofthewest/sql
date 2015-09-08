@@ -1,37 +1,37 @@
 /***********************************************************************
-*
-*N  geom-fc-insert-point-loop.SQL  --  Insert geometry points into feature class
-*
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*P  Purpose:
-*     This script serves to insert point data stored in one table into
-*   a registered feature class within an enterprise geodatabase.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*H  History:
-*
-*    Christian Wells        08/22/2015               Original coding.
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*V  Versions Supported:
-*   EGDB: 10.0 and above
-*	  DBMS: SQL Server
-*	  DBMS Version: All
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*T  Tags:
-*   SQL Server, Feature Class, Geometry, Insert, Point
-*E
-*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*
-*R  Resources:
-*   Next_RowID:
-*	  http://desktop.arcgis.com/en/desktop/latest/manage-data/using-sql-with-gdbs/next-rowid.htm
-*E
+
+geom-fc-insert-point-loop.SQL  --  Insert geometry points into feature class
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Purpose:
+ This script serves to insert point data stored in one table into
+a registered feature class within an enterprise geodatabase.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+History:
+
+Christian Wells        08/22/2015               Original coding.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Versions Supported:
+EGDB: 10.0 and above
+DBMS: SQL Server
+DBMS Version: All
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Tags:
+SQL Server, Feature Class, Geometry, Insert, Point
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Resources:
+Next_RowID:
+http://desktop.arcgis.com/en/desktop/latest/manage-data/using-sql-with-gdbs/next-rowid.htm
+
 ***********************************************************************/
 --SQL SERVER LOOP
 
@@ -58,4 +58,4 @@ DECLARE
       FROM sde.INPUT_TABLE
       WHERE objectid  = @iterator;
       SELECT @iterator= MIN(OBJECTID) FROM SDE.INPUT_TABLE WHERE @iterator < OBJECTID
-    END 
+    END
