@@ -14,7 +14,6 @@ be run one step at a time.
 History:
 
 Christian Wells        11/03/2014               Original coding.
-Tina Morgan           12/01/2014
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -50,7 +49,7 @@ GRANT EXECUTE ON dbms_lock TO public;
 GRANT EXECUTE ON dbms_lob TO public;
 GRANT EXECUTE ON dbms_utility TO public;
 GRANT EXECUTE ON dbms_sql TO public;
-
+GRANT EXECUTE ON utl_raw TO public;
 
 --4. Create all required tablespaces
 --Note this is a default tablespace to auto extend
