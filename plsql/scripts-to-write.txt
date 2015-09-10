@@ -1,0 +1,42 @@
+Oracle Scripts to Write:
+
+1. Advanced User Info
+-username
+-password lifetime
+-roles/profile
+-privileges
+-tablespace/quota
+-object count
+-invalid objects
+
+2. Orphaned Locks/Users/tables/connections/version/domains
+
+3. Tablespace/datafile list
+
+4. CBO Trace/ XPLAN
+
+5. Decode logfiles
+
+6. Stats/Index update time
+
+
+SDO Geometry:
+
+1. Create Table/Index/Insert Metadata/Update metadata
+
+2. Validate SDO
+
+3. Common functions
+
+4. Shape column metadata SRID/Entity Type
+
+
+ST Geometry:
+
+1. Create Table/Index
+
+2. Add ST_SHAPELIB
+
+3. Common functions
+
+4. Shape column metadata SRID/Entity Type
