@@ -19,6 +19,17 @@ Oracle Scripts to Write:
 
 6. Stats/Index update time
 
+7. User/Object Privs
+
+8. Tablespace quotas
+
+9. TBS Usage
+
+10. Get DDL
+
+
+
+
 
 SDO Geometry:
 
