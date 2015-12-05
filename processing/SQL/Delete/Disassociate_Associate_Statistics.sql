@@ -1,0 +1,14 @@
+
+DISASSOCIATE STATISTICS FROM TYPES SDE.ST_GEOMETRY;
+DISASSOCIATE STATISTICS FROM INDEXTYPES SDE.ST_spatial_index;
+DISASSOCIATE STATISTICS FROM PACKAGES SDE.ST_domain_operators;
+DISASSOCIATE STATISTICS FROM PACKAGES SDE.ST_relation_operators;
+
+ASSOCIATE STATISTICS WITH PACKAGES sde.st_domain_operators, sde.st_relation_operators USING sde.st_domain_stats;
+
+ASSOCIATE STATISTICS WITH INDEXTYPES sde.st_spatial_index USING sde.st_domain_stats;
+
+ASSOCIATE STATISTICS WITH TYPES sde.st_geometry USING sde.st_domain_stats;
+
+
+commit;

@@ -1,0 +1,33 @@
+
+set serveroutput on 
+
+--SET PAGES 20000
+--SPOOL C:\TEMP\DROP_T_TABLES.SQL REPLACE
+--SELECT 'DROP TABLE '||TNAME||' PURGE;' FROM TAB WHERE TNAME LIKE 'T%';
+--SPOOL OFF
+--@C:\TEMP\DROP_T_TABLES.SQL
+
+
+declare
+
+  stmt1 varchar2(100);
+  stmt2 varchar2(100);
+  stmt3 varchar2(100);
+
+begin
+
+  for i in 1..20000 loop
+    stmt1 := ('create table t'||i||'(x integer)');
+	execute immediate stmt1;
+	
+    stmt2 := 'commit';
+	execute immediate stmt2;
+	
+	stmt3 := 'grant SELECT,INSERT,UPDATE,DELETE on t'||i||' to USER01';
+	execute immediate stmt3;
+	
+  end loop;
+  
+end;
+
+/

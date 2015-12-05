@@ -1,0 +1,100 @@
+Option Explicit
+  
+  Const strNameOfGDB_ObjectClasses = "gdb_objectclasses"
+  Const strNameOfGDB_FeatureClasses = "gdb_featureclasses"
+  
+  Public Sub FileGDB_DeFM_sqlSyntax()
+
+    Dim app As IGxApplication
+    Set app = New AppRef
+    Dim pWorkspace As IWorkspace
+    Set pWorkspace = app.SelectedObject.InternalObjectName.Open
+    
+    '-- Simple features
+    Debug.Print DeArcFMify(pWorkspace, "{52353152-891A-11D0-BEC6-00805F7C4268}", "1", "IN(1,2,3,4)", " AND clsid Not IN ('{BA9ADB3A-7702-4DB8-A0F2-A43887084208}', '{AC7DBF37-7523-4186-8D40-B20FA197AF19}')") & " Simple features updates"
+'    pWorkspace.ExecuteSQL "UPDATE gdb_objectclasses SET clsid = '{52353152-891A-11D0-BEC6-00805F7C4268}' WHERE id IN(SELECT gdb_objectclasses.id FROM gdb_objectclasses, gdb_featureclasses WHERE gdb_objectclasses.id = gdb_featureclasses.objectclassid AND featuretype = 1 AND geometrytype IN(1,2,3,4))"
+    
+    '-- Complex edge
+    Debug.Print DeArcFMify(pWorkspace, "{A30E8A2A-C50B-11D1-AEA9-0000F80372B4}", "10", "= 3") & " Complex edge updates"
+'    pWorkspace.ExecuteSQL "UPDATE gdb_objectclasses SET clsid = '{A30E8A2A-C50B-11D1-AEA9-0000F80372B4}' WHERE id IN(SELECT gdb_objectclasses.id FROM gdb_objectclasses, gdb_featureclasses WHERE gdb_objectclasses.id = gdb_featureclasses.objectclassid AND featuretype = 10 AND geometrytype = 3)"
+    
+    '-- Simple edge
+    Debug.Print DeArcFMify(pWorkspace, "{E7031C90-55FE-11D1-AE55-0000F80372B4}", "8", "= 3") & " Simple edge updates"
+'    pWorkspace.ExecuteSQL "UPDATE gdb_objectclasses SET clsid = '{E7031C90-55FE-11D1-AE55-0000F80372B4}' WHERE id IN(SELECT gdb_objectclasses.id FROM gdb_objectclasses, gdb_featureclasses WHERE gdb_objectclasses.id = gdb_featureclasses.objectclassid AND featuretype = 8 AND geometrytype = 3)"
+    
+    '-- Simple junction
+    Debug.Print DeArcFMify(pWorkspace, "{CEE8D6B8-55FE-11D1-AE55-0000F80372B4}", "7", "= 1") & " Simple junction updates"
+'    pWorkspace.ExecuteSQL "UPDATE gdb_objectclasses SET clsid = '{CEE8D6B8-55FE-11D1-AE55-0000F80372B4}' WHERE id IN(SELECT gdb_objectclasses.id FROM gdb_objectclasses, gdb_featureclasses WHERE gdb_objectclasses.id = gdb_featureclasses.objectclassid AND featuretype = 7 AND geometrytype = 1)"
+
+    '-- Annotation
+    Debug.Print DeArcFMify(pWorkspace, "{E3676993-C682-11D2-8A2A-006097AFF44E}", "11", "= 4") & " Annotation updates"
+
+    '-- Dimension
+    Debug.Print DeArcFMify(pWorkspace, "{496764FC-E0C9-11D3-80CE-00C04F601565}", "13", "= 4") & " Dimension updates"
+    
+    '-- Registered Tables
+    pWorkspace.ExecuteSQL "UPDATE " & strNameOfGDB_ObjectClasses & " SET clsid = '{7A566981-C114-11D2-8A28-006097AFF44E}' WHERE id NOT IN(SELECT objectclassid FROM " & strNameOfGDB_FeatureClasses & ")"
+
+    '-- Class extensions
+    pWorkspace.ExecuteSQL "UPDATE " & strNameOfGDB_ObjectClasses & " SET extclsid = NULL WHERE extclsid NOT IN ('{24429589-D711-11D2-9F41-00C04F6BC6A5}','{48F935E2-DA66-11D3-80CE-00C04F601565}')"
+
+    msgbox "DeArcFMification Complete! - refresh Workspace and containing folder by selecting and pressing F5 on each"
+
+  End Sub
+  
+  Public Function DeArcFMify(pWorkspace As IWorkspace, ReplacementCLSID As String, strFTValue As String, strGTValue As String, Optional postWhereClause As String) As Integer
+    Dim pFeatureWorkspace As IFeatureWorkspace
+    Set pFeatureWorkspace = pWorkspace
+    
+    Dim gdb_objectclasses As ITable
+    Dim oc_Cursor As ICursor
+    
+    Dim gdb_featureclasses As ITable
+    Dim fc_Cursor As ICursor
+    
+    Set gdb_objectclasses = pFeatureWorkspace.OpenTable(strNameOfGDB_ObjectClasses)
+    Set gdb_featureclasses = pFeatureWorkspace.OpenTable(strNameOfGDB_FeatureClasses)
+    
+    Dim clsidFieldIndex As Integer
+    clsidFieldIndex = gdb_objectclasses.Fields.FindField("clsid")
+    
+    Dim pQueryFilter As IQueryFilter
+    Set pQueryFilter = New QueryFilter
+    pQueryFilter.WhereClause = "(featuretype = " & strFTValue & ") AND (geometrytype " & strGTValue & ")"
+        
+    Dim pfcRow As IRow
+    Set fc_Cursor = gdb_featureclasses.Search(pQueryFilter, False)
+    Set pfcRow = fc_Cursor.NextRow
+    
+    Dim strOIDList As String
+    While Not pfcRow Is Nothing
+      If Len(strOIDList) = 0 Then
+        strOIDList = pfcRow.value(0)
+      Else
+        strOIDList = strOIDList & "," & pfcRow.value(0)
+      End If
+     Set pfcRow = fc_Cursor.NextRow
+    Wend
+    'Debug.Print strOIDList
+    
+    If Len(strOIDList) = 0 Then
+      DeArcFMify = 0
+      Exit Function
+    End If
+    
+    Set pQueryFilter = New QueryFilter
+    pQueryFilter.WhereClause = "id in(" & strOIDList & ")" & postWhereClause
+    Set oc_Cursor = gdb_objectclasses.Update(pQueryFilter, False)
+    Dim pRow As IRow
+    Set pRow = oc_Cursor.NextRow
+    
+    Dim i As Integer
+    While Not pRow Is Nothing
+      i = i + 1
+      'Debug.Print pRow.Value(clsidFieldIndex)
+      pRow.value(clsidFieldIndex) = ReplacementCLSID
+      oc_Cursor.UpdateRow pRow
+      Set pRow = oc_Cursor.NextRow
+    Wend
+    DeArcFMify = i
+  End Function

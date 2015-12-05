@@ -1,0 +1,33 @@
+   -- **************************************************
+   --     Set the default Ext for clsids
+   -- **************************************************
+   -- assumed run as SDE table owner (other wise fully qualify table names)
+   -- Simple features
+      update gdb_objectclasses set clsid = '{52353152-891A-11D0-BEC6-00805F7C4268}', extclsid = NULL where ID in (select objectclassid from gdb_featureclasses where FEATURETYPE = 1) and clsid Not in ('{BA9ADB3A-7702-4DB8-A0F2-A43887084208}', '{AC7DBF37-7523-4186-8D40-B20FA197AF19}'); 
+   -- **************************************************   
+   -- Complex edge
+      update gdb_objectclasses set clsid = '{A30E8A2A-C50B-11D1-AEA9-0000F80372B4}', extclsid = NULL where ID in (select objectclassid from gdb_featureclasses where FEATURETYPE = 10);
+   -- **************************************************   
+   -- Simple edge
+      update gdb_objectclasses set clsid = '{E7031C90-55FE-11D1-AE55-0000F80372B4}', extclsid = NULL where ID in (select objectclassid from gdb_featureclasses where FEATURETYPE = 8);
+   -- ************************************************** 
+   -- Simple junction
+      update gdb_objectclasses set clsid = '{CEE8D6B8-55FE-11D1-AE55-0000F80372B4}', extclsid = NULL where ID in (select objectclassid from gdb_featureclasses where FEATURETYPE = 7);
+   -- **************************************************
+   -- Annotation
+      update gdb_objectclasses set clsid = '{E3676993-C682-11D2-8A2A-006097AFF44E}', extclsid = '{24429589-D711-11D2-9F41-00C04F6BC6A5}' where ID in (select objectclassid from gdb_featureclasses where FEATURETYPE = 11);
+   -- ************************************************** 
+   -- Dimensions
+      update sde.gdb_objectclasses set clsid = '{496764FC-E0C9-11D3-80CE-00C04F601565}', extclsid = '{48F935E2-DA66-11D3-80CE-00C04F601565}' where ID in (select objectclassid from sde.gdb_featureclasses where FEATURETYPE = 13);
+   -- **************************************************   
+   -- Registered Tables
+      UPDATE gdb_objectclasses SET clsid = '{7A566981-C114-11D2-8A28-006097AFF44E}' WHERE id NOT IN (SELECT objectclassid FROM gdb_featureclasses);
+   -- **************************************************   
+   -- Class extensions
+      UPDATE gdb_objectclasses SET extclsid = NULL WHERE extclsid NOT IN ('{24429589-D711-11D2-9F41-00C04F6BC6A5}','{48F935E2-DA66-11D3-80CE-00C04F601565}');
+   -- **************************************************
+   -- Might require removing extensions
+      DELETE FROM gdb_extensions;
+   -- **************************************************   
+   COMMIT;
+

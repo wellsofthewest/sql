@@ -1,0 +1,85 @@
+/*
+============================
+Database restore using IMPDP
+http://ss64.com/ora/impdp.html
+============================
+*/
+
+
+--1. Insert entry into the USER_SDO_GEOM_METDATA view
+
+/*
+VALUES REQUIRED:
+----------------
+TABLENAME
+SPATIALCOLUMN
+SRID
+*/
+
+
+INSERT
+INTO USER_SDO_GEOM_METDATA
+  VALUES
+  (
+    '<TABLENAME>',
+    '<SPATIALCOLUMN>',
+    SDO_DIM_ARRAY( -- 20X20 grid
+    SDO_DIM_ELEMENT('X', 0, 20, 0.0005), SDO_DIM_ELEMENT('Y', 0, 20, 0.0005) ),
+    <SRID> -- SRID
+  );
+
+
+--2. Update the DIMINFO value to be the most accurate extent of the spatial data
+
+/*
+VALUES REQUIRED:
+----------------
+TABLENAME
+SPATIALCOLUMN
+*/
+
+
+UPDATE USER_SDO_GEOM_METDATA
+SET DIMINFO =
+  (SELECT MDSYS.SDO_DIM_ARRAY( MDSYS.SDO_DIM_ELEMENT('X', MINX, MAXX, 0.0005), MDSYS.SDO_DIM_ELEMENT('Y', MINY, MAXY, 0.0005)) AS DIMINFO
+  FROM
+    (SELECT TRUNC( MIN( V.X ) - 1,0) AS MINX,
+      ROUND( MAX( V.X )       + 1,0) AS MAXX,
+      TRUNC( MIN( V.Y )       - 1,0) AS MINY,
+      ROUND( MAX( V.Y )       + 1,0) AS MAXY
+    FROM
+      (SELECT SDO_AGGR_MBR(A.<SPATIALCOLUMN>) AS MBR FROM <TABLENAME> A
+      ) B,
+      TABLE(MDSYS.SDO_UTIL.GET_VERTICES(B.MBR)) V
+    )
+  )
+WHERE TABLE_NAME = '<TABLENAME>'
+AND COLUMN_NAME  = '<SPATIALCOLUMN>';
+
+
+--3. Create or Rebuild the index
+
+--CREATE INDEX
+
+CREATE INDEX <INDEXNAME> ON <TABLENAME>(<SPATIALCOLUMN>)
+INDEXTYPE IS MDSYS.SPATIAL_INDEX;
+
+/*
+VALUES REQUIRED:
+----------------
+INDEXNAME
+TABLENAME
+SPATIALCOLUMN
+*/
+
+
+--OR--
+
+--REBUILD INDEX
+
+COLUMN INDEX_NAME FORMAT A30;
+
+SELECT INDEX_NAME
+FROM USER_INDEXES
+WHERE TABLE_NAME = 'FEMA_2'
+AND ITYP_NAME   = 'SPATIAL_INDEX';

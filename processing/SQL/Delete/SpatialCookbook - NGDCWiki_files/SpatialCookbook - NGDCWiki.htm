@@ -1,0 +1,780 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0062)https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./SpatialCookbook - NGDCWiki_files/ga.js"></script><script type="text/javascript">var _gaq = _gaq || [];_gaq.push(['_setSiteSpeedSampleRate', 100]);</script>
+		
+		<meta name="generator" content="MediaWiki 1.13.2">
+		<meta name="keywords" content="SpatialCookbook,SpatialCookbook,ArcSDE Notes,ESRI Knowledge Base Articles of Interest,Geodetic Data in Oracle,ModifySrid,OracleSpatialRestrictBadData,Oracle Spatial References,Raster Cookbook,Sample Oracle Spatial Queries,SpatialValidateLayer">
+		<link rel="shortcut icon" href="https://www.ngdc.noaa.gov/favicon.ico">
+		<link rel="search" type="application/opensearchdescription+xml" href="https://www.ngdc.noaa.gov/wiki/opensearch_desc.php" title="NGDCWiki (en)">
+		<link rel="alternate" type="application/rss+xml" title="NGDCWiki RSS Feed" href="http://www.ngdc.noaa.gov/wiki/index.php?title=Special:RecentChanges&feed=rss">
+		<link rel="alternate" type="application/atom+xml" title="NGDCWiki Atom Feed" href="http://www.ngdc.noaa.gov/wiki/index.php?title=Special:RecentChanges&feed=atom">
+		<title>SpatialCookbook - NGDCWiki</title>
+		<style type="text/css" media="screen, projection">/*<![CDATA[*/
+			@import "/wiki/skins/common/shared.css?164";
+			@import "/wiki/skins/monobook/main.css?164";
+		/*]]>*/</style>
+		<link rel="stylesheet" type="text/css" media="print" href="./SpatialCookbook - NGDCWiki_files/commonPrint.css">
+		<!--[if lt IE 5.5000]><style type="text/css">@import "/wiki/skins/monobook/IE50Fixes.css?164";</style><![endif]-->
+		<!--[if IE 5.5000]><style type="text/css">@import "/wiki/skins/monobook/IE55Fixes.css?164";</style><![endif]-->
+		<!--[if IE 6]><style type="text/css">@import "/wiki/skins/monobook/IE60Fixes.css?164";</style><![endif]-->
+		<!--[if IE 7]><style type="text/css">@import "/wiki/skins/monobook/IE70Fixes.css?164";</style><![endif]-->
+		<!--[if lt IE 7]><script type="text/javascript" src="/wiki/skins/common/IEFixes.js?164"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+		
+		<script type="text/javascript">/*<![CDATA[*/
+var skin = "monobook";
+var stylepath = "/wiki/skins";
+var wgArticlePath = "/wiki/index.php?title=$1";
+var wgScriptPath = "/wiki";
+var wgScript = "/wiki/index.php";
+var wgVariantArticlePath = false;
+var wgActionPaths = [];
+var wgServer = "http://www.ngdc.noaa.gov";
+var wgCanonicalNamespace = "";
+var wgCanonicalSpecialPageName = false;
+var wgNamespaceNumber = 0;
+var wgPageName = "SpatialCookbook";
+var wgTitle = "SpatialCookbook";
+var wgAction = "view";
+var wgArticleId = "1367";
+var wgIsArticle = true;
+var wgUserName = null;
+var wgUserGroups = null;
+var wgUserLanguage = "en";
+var wgContentLanguage = "en";
+var wgBreakFrames = false;
+var wgCurRevisionId = "5091";
+var wgVersion = "1.13.2";
+var wgEnableAPI = true;
+var wgEnableWriteAPI = false;
+var wgRestrictionEdit = [];
+var wgRestrictionMove = [];
+/*]]>*/</script>
+                
+		<script type="text/javascript" src="./SpatialCookbook - NGDCWiki_files/wikibits.js"><!-- wikibits js --></script><style type="text/css">@import "/wiki/skins/monobook/KHTMLFixes.css";</style>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="./SpatialCookbook - NGDCWiki_files/ajax.js"></script>
+		<script type="text/javascript" src="./SpatialCookbook - NGDCWiki_files/index.php"><!-- site js --></script>
+		<style type="text/css">/*<![CDATA[*/
+@import "/wiki/index.php?title=MediaWiki:Common.css&usemsgcache=yes&action=raw&ctype=text/css&smaxage=18000";
+@import "/wiki/index.php?title=MediaWiki:Monobook.css&usemsgcache=yes&action=raw&ctype=text/css&smaxage=18000";
+@import "/wiki/index.php?title=-&action=raw&gen=css&maxage=18000&useskin=monobook";
+/*]]>*/</style>
+	</head>
+<body class="mediawiki ns-0 ltr page-SpatialCookbook">
+	<div id="globalWrapper">
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+				<h1 class="firstHeading">SpatialCookbook</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">From NGDCWiki</h3>
+			<div id="contentSub"></div>
+									<div id="jump-to-nav">Jump to: <a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#column-one">navigation</a>, <a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#searchInput">search</a></div>			<!-- start content -->
+			<table id="toc" class="toc" summary="Contents"><tbody><tr><td><div id="toctitle"><h2>Contents</h2> <span class="toctoggle">[<a id="togglelink" class="internal" href="javascript:toggleToc()">hide</a>]</span></div>
+<ul>
+<li class="toclevel-1"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Oracle_Spatial_and_ArcSDE_Cookbook"><span class="tocnumber">1</span> <span class="toctext">Oracle Spatial and ArcSDE Cookbook</span></a>
+<ul>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Resources"><span class="tocnumber">1.1</span> <span class="toctext">Resources</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Create_a_table.2C_insert_point_values.2C_register_with_Oracle_and_ArcSDE"><span class="tocnumber">1.2</span> <span class="toctext">Create a table, insert point values, register with Oracle and ArcSDE</span></a>
+<ul>
+<li class="toclevel-3"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#create_a_table_including_columns_for_X.2C_Y_values"><span class="tocnumber">1.2.1</span> <span class="toctext">create a table including columns for X, Y values</span></a></li>
+<li class="toclevel-3"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#insert_two_records_into_the_table"><span class="tocnumber">1.2.2</span> <span class="toctext">insert two records into the table</span></a></li>
+<li class="toclevel-3"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#populate_the_Oracle_Spatial_metadata_for_this_table"><span class="tocnumber">1.2.3</span> <span class="toctext">populate the Oracle Spatial metadata for this table</span></a></li>
+<li class="toclevel-3"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#create_a_spatial_index_on_the_geometry_column"><span class="tocnumber">1.2.4</span> <span class="toctext">create a spatial index on the geometry column</span></a></li>
+<li class="toclevel-3"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#.28optional.29_validate_the_geometry_in_the_table"><span class="tocnumber">1.2.5</span> <span class="toctext">(optional) validate the geometry in the table</span></a></li>
+<li class="toclevel-3"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#register_the_table_with_SDE.2C_creating_a_.22layer.22_accessible_to_ESRI_clients_.28ArcMap.2C_ArcIMS.2C_etc..29"><span class="tocnumber">1.2.6</span> <span class="toctext">register the table with SDE, creating a "layer" accessible to ESRI clients (ArcMap, ArcIMS, etc.)</span></a></li>
+<li class="toclevel-3"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Registering_as_a_SDE_Layer_vs._registering_with_the_Geodatabase_.28i.e._creating_a_Feature_Class.29"><span class="tocnumber">1.2.7</span> <span class="toctext">Registering as a SDE Layer vs. registering with the Geodatabase (i.e. creating a Feature Class)</span></a></li>
+<li class="toclevel-3"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#If_a_null_SRID_was_used_in_Oracle.2C_.22correct.22_the_SRID_in_the_SDE_metadata"><span class="tocnumber">1.2.8</span> <span class="toctext">If a null SRID was used in Oracle, "correct" the SRID in the SDE metadata</span></a></li>
+<li class="toclevel-3"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#grant_SELECT_privileges_to_the_SDE_VIEWER_role_so_other_users_can_see_the_table"><span class="tocnumber">1.2.9</span> <span class="toctext">grant SELECT privileges to the SDE_VIEWER role so other users can see the table</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Spatially-enable_an_existing_table_containing_columns_.22LONGITUDE.22_AND_.22LATITUDE.22"><span class="tocnumber">1.3</span> <span class="toctext">Spatially-enable an existing table containing columns "LONGITUDE" AND "LATITUDE"</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Split_large_geodetic_polygons_at_the_prime-meridian"><span class="tocnumber">1.4</span> <span class="toctext">Split large geodetic polygons at the prime-meridian</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Create_a_table.2C_insert_polygon_values.2C_register_with_Oracle_and_SDE"><span class="tocnumber">1.5</span> <span class="toctext">Create a table, insert polygon values, register with Oracle and SDE</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Spatially-enable_an_existing_table_containing_columns_holding_corner_points"><span class="tocnumber">1.6</span> <span class="toctext">Spatially-enable an existing table containing columns holding corner points</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Create_a_table.2C_insert_line_values.2C_register_with_Oracle_and_SDE"><span class="tocnumber">1.7</span> <span class="toctext">Create a table, insert line values, register with Oracle and SDE</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Create_lines_from_a_point_table"><span class="tocnumber">1.8</span> <span class="toctext">Create lines from a point table</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Register_a_table_containing_multiple_spatial_columns"><span class="tocnumber">1.9</span> <span class="toctext">Register a table containing multiple spatial columns</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Register_a_table_whose_geometry_column_contains_multiple_geometry_types"><span class="tocnumber">1.10</span> <span class="toctext">Register a table whose geometry column contains multiple geometry types</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Create_and_register_a_view"><span class="tocnumber">1.11</span> <span class="toctext">Create and register a view</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Modify_the_SRID_of_a_table_that_is_already_registered_with_SDE"><span class="tocnumber">1.12</span> <span class="toctext">Modify the SRID of a table that is already registered with SDE</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Create_a_spatial_table_using_shp2sde"><span class="tocnumber">1.13</span> <span class="toctext">Create a spatial table using shp2sde</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Restricting_invalid_geometries_from_table"><span class="tocnumber">1.14</span> <span class="toctext">Restricting invalid geometries from table</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Oracle_SDO_GTYPE_.2F_ESRI_Entity_Type_Comparison"><span class="tocnumber">1.15</span> <span class="toctext">Oracle SDO_GTYPE / ESRI Entity Type Comparison</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Commonly-used_Oracle_and_ESRI_spatial_reference_identifier_values_.28SRIDs.29"><span class="tocnumber">1.16</span> <span class="toctext">Commonly-used Oracle and ESRI spatial reference identifier values (SRIDs)</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#NGDC_Spatial_Table__and_View_Naming_Conventions"><span class="tocnumber">1.17</span> <span class="toctext">NGDC Spatial Table  and View Naming Conventions</span></a></li>
+<li class="toclevel-2"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#System_Units_.28affecting_feature_validity.29"><span class="tocnumber">1.18</span> <span class="toctext">System Units (affecting feature validity)</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></tbody></table><script type="text/javascript"> if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<a name="Oracle_Spatial_and_ArcSDE_Cookbook"></a><h1> <span class="mw-headline"> Oracle Spatial and ArcSDE Cookbook </span></h1>
+<a name="Resources"></a><h2> <span class="mw-headline"> Resources </span></h2>
+<ul><li> <a href="https://www.ngdc.noaa.gov/wiki/index.php?title=Raster_Cookbook" title="Raster Cookbook">Raster Cookbook</a>
+</li><li> <a href="https://www.ngdc.noaa.gov/wiki/index.php?title=Oracle_Spatial_References" title="Oracle Spatial References">Oracle Spatial References</a>
+</li><li> <a href="https://www.ngdc.noaa.gov/wiki/index.php?title=ESRI_Knowledge_Base_Articles_of_Interest" title="ESRI Knowledge Base Articles of Interest">ESRI Knowledge Base Articles of Interest</a>
+</li><li> <a href="https://www.ngdc.noaa.gov/wiki/index.php?title=ArcSDE_Notes" title="ArcSDE Notes">ArcSDE Notes</a>
+</li><li> <a href="http://support.esri.com/index.cfm?fa=knowledgebase.techarticles.articleShow&d=20275" class="external text" title="http://support.esri.com/index.cfm?fa=knowledgebase.techarticles.articleShow&amp;d=20275" rel="nofollow">ESRI Article on registering Oracle Spatial tables</a>
+</li><li> <a href="https://www.ngdc.noaa.gov/wiki/index.php?title=Geodetic_Data_in_Oracle" title="Geodetic Data in Oracle">Geodetic Data in Oracle</a>
+</li><li> <a href="https://www.ngdc.noaa.gov/wiki/index.php?title=Sample_Oracle_Spatial_Queries" title="Sample Oracle Spatial Queries">Sample Oracle Spatial Queries</a>
+</li><li> <a href="http://download.oracle.com/otndocs/products/spatial/pdf/oow2010/spatial/spatialoow10_bestpractices.pdf" class="external text" title="http://download.oracle.com/otndocs/products/spatial/pdf/oow2010/spatial/spatialoow10_bestpractices.pdf" rel="nofollow">Oracle Spatial Best Practices presentation</a>
+</li></ul>
+<a name="Create_a_table.2C_insert_point_values.2C_register_with_Oracle_and_ArcSDE"></a><h2> <span class="mw-headline"> Create a table, insert point values, register with Oracle and ArcSDE </span></h2>
+<a name="create_a_table_including_columns_for_X.2C_Y_values"></a><h3> <span class="mw-headline"> create a table including columns for X, Y values </span></h3>
+<pre>create table point_tst (
+  OBJECTID NUMBER(38) NOT NULL UNIQUE,
+  NAME VARCHAR2(32),
+  LON NUMBER,
+  LAT NUMBER,
+  SHAPE MDSYS.SDO_GEOMETRY
+);
+</pre>
+<p>The "OBJECTID" column may be named anything, but must be defined as "NUMBER(38)" and constrained to "NOT NULL, UNIQUE" in order to be used by SDE.
+The "SHAPE" column may be named anything, but must be of type "MDSYS.SDO_GEOMETRY"
+</p>
+<a name="insert_two_records_into_the_table"></a><h3> <span class="mw-headline"> insert two records into the table </span></h3>
+<pre>insert into point_tst values (
+  1,
+  'Boulder',
+  -105.2700,
+  40.0150,
+  MDSYS.SDO_GEOMETRY(
+     2001,
+     8307,
+     MDSYS.SDO_POINT_TYPE(-105.2700, 40.0150, NULL),
+     NULL,
+     NULL
+  )
+);
+</pre>
+<pre>insert into point_tst values (
+  2,
+  'Denver',
+  -104.9842,
+  39.7392,
+  MDSYS.SDO_GEOMETRY(
+     2001,
+     8307,
+     MDSYS.SDO_POINT_TYPE(-104.9842, 39.7392, NULL),
+     NULL,
+     NULL
+  )
+);
+</pre>
+<p>The <i>SHAPE</i> field is populated with a geometry object that is constructed as part of the insert statement. The constructor for this geometry object takes five arguments, only the first three of which are of interest here. The '2001' is a  SDO_GTYPE value indicating a 2-D single point. The SDO_GEOMETRY field is commonly named "SHAPE", but this is a only a naming convention.
+</p><p>The second argument indicates the Spatial Reference Identifier (SRID) for this object. "8307" in this example indicates geodetic data on a WGS84 datum (A complete list of SRID codes and descriptions can be found in the MDSYS.CS_SRS table).  By setting this value to NULL, Oracle will treat the data as Cartesian.
+</p><p>The third argument is a constructor for a SDO_POINT_TYPE object.  The three arguments here are X, Y, and Z coordinates respectively.
+</p><p>The final two arguments are SDO_ELEM_INFO and SDO_ORDINATES objects and are set to NULL when using SDO_POINT as the geometry type.
+</p><p>Alternatively, you can also use OGC well-known-text to construct a geometry.
+</p>
+<pre>insert into point_tst values (
+  2,
+  'Denver',
+  -104.9842,
+  39.7392,
+  MDSYS.SDO_GEOMETRY('POINT (-104.9842 39.7392)', 8307)
+);
+</pre>
+<p><br>
+</p>
+<a name="populate_the_Oracle_Spatial_metadata_for_this_table"></a><h3> <span class="mw-headline"> populate the Oracle Spatial metadata for this table </span></h3>
+<p>Insert a record into <i>USER_SDO_GEOM_METADATA</i>.
+</p>
+<pre>insert into user_sdo_geom_metadata values (
+  'POINT_TST',
+  'SHAPE',
+  MDSYS.SDO_DIM_ARRAY(
+     MDSYS.SDO_DIM_ELEMENT('LONGITUDE',-180,180,0.05), 
+     MDSYS.SDO_DIM_ELEMENT('LATITUDE',-90,90,0.05)
+  ),
+  8307);
+</pre>
+<p>Note that NOSA tables currently use NAD83 (Oracle SRID=8265) - this will be migrated to WGS84 in the future.
+</p><p>The first two fields in this record are the table name and the column holding the SDO_GEOMTETRY value.  Recommended to always use uppercase for table and column names here.
+</p><p>The third field is an array object containing two dimension elements for the x and y dimensions respectively.  The constructors for each of these contains the dimension name, minimum and maximum values, and the tolerance.  The dimensions can be named anything, but by convention are "LONGITUDE", "LATITUDE" for geodetic data and "X", "Y" for projected data. In the case of geodetic data, the ranges must be -180 to +180 for longitude and -90 to +90 for latitude.  The units for the tolerance are specified in meters (despite the longitude and latitude values having units of decimal degrees). The tolerance value for geodetic data should not be smaller than 0.05 (5 centimeters), and in most cases it should be larger. Oracle spatial uses 0.05 as the tolerance value for geodetic data if you specify a smaller value.  For non-geodetic data, the tolerance units are the same as the x,y units.  So, if you specify NULL SRID and still use decimal degrees for the x,y coordinates, the tolerance will be in units of decimal degrees.
+</p><p>The last value is the SRID, and this needs to match the value specified in the MDSYS.SDO_GEOMETRY constructor in the previous step. Again, a NULL value here causes Oracle to treat these data as cartesian and not geodetic.<br>
+</p>
+<a name="create_a_spatial_index_on_the_geometry_column"></a><h3> <span class="mw-headline"> create a spatial index on the geometry column </span></h3>
+<pre>create index point_tst_spatial_idx on point_tst(SHAPE) 
+indextype is MDSYS.SPATIAL_INDEX parameters ('LAYER_GTYPE=point');
+</pre>
+<p>This builds a RTREE index on the geometry column. The index name is arbitrary, but limited to 32 characters in length.  The <i>parameters 'LAYER_GTYPE=point')</i> clause is optional and insures that only point features may be inserted into this table.  It also may increase the performance of some queries.  Although Oracle allows different types of geometries in a single column, ArcSDE does not. This constraint enforces that restriction.<br>
+With earlier versions of ArcSDE, ESRI did NOT recommend using this index constraint. See <a href="http://support.esri.com/index.cfm?fa=knowledgebase.techarticles.articleShow&d=23179|Knowledge" class="external text" title="http://support.esri.com/index.cfm?fa=knowledgebase.techarticles.articleShow&amp;d=23179|Knowledge" rel="nofollow">Base article 23179</a>, however it seems to work fine in ArcSDE 9.x
+</p><p>At this point the table is spatially enabled and ready for use with SQL spatial queries. 
+</p>
+<a name=".28optional.29_validate_the_geometry_in_the_table"></a><h3> <span class="mw-headline"> (optional) <a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialValidateLayer" title="SpatialValidateLayer">validate the geometry</a> in the table </span></h3>
+<a name="register_the_table_with_SDE.2C_creating_a_.22layer.22_accessible_to_ESRI_clients_.28ArcMap.2C_ArcIMS.2C_etc..29"></a><h3> <span class="mw-headline"> register the table with SDE, creating a "layer" accessible to ESRI clients (ArcMap, ArcIMS, etc.) </span></h3>
+<p>Substitute the sdehostname (e.g. bobcat, cheetah, cougar, or kodkod) and the user name (schema name, e.g. mgg, nosa) and schema password in the command.
+</p><p>Syntax for ArcSDE 9.3. Note the use of the "-t", "-P" parameters to specify the geometry type and precision respectively
+</p>
+<pre>sdelayer -o register  -u geodas -i port:5151 -s sleet.ngdc.noaa.gov -l HIRES_VSQL,SHAPE -e sl+ -C OBJECTID,USER -t  SDO_GEOMETRY 
+-S "high resolution geodas tracklines" -k SDO_WGS84 -P HIGH
+</pre>
+<p>Syntax for ArcSDE 9.2 and earlier did not include the "-t" parameter but used the dbtune keyword to indirectly specify geometry type, e.g.
+</p>
+<pre>sdelayer -o register -l POINT_TST,SHAPE -e p -c OBJECTID -C USER -s &lt;sdehostname&gt; ^
+-S "layer description" -k SDO_WGS84 -u &lt;username&gt; -p &lt;password&gt;
+</pre>
+<p>marks the layer as using SDO_GEOMETRY for geometry storage and 8307 for the SRID because they are specified in the DBTUNE file under the <b>SDO_WGS84</b> keyword
+</p><p>This registers the table with ArcSDE, but not with the Geodatabase.  This however is all that is need to use the spatially-enabled table with ESRI clients. <a href="http://arcsdeonline.esri.com/Support_files/admin_cmd_refs/sdelayer.htm%7Cman" class="external text" title="http://arcsdeonline.esri.com/Support_files/admin_cmd_refs/sdelayer.htm|man" rel="nofollow">page for sdelayer</a>.
+</p><p>Registering a table using ArcCatalog or allowing AutoRegistration to take place will regsiter the spatial table as a featureclass in the geodatabase.  If this happens, the layer can no longer be deleted using sdelayer as it will leave a remnant in the ArcSDE repository.
+</p><p>When a layer is registered, the spatial reference system is read from the oracle spatial metadata (USER_SDO_GEOM_METADATA view). Oracle and ArcSDE use different SRID codes, so the mapping between SRIDs is done via the text description of the spatial reference. In earlier ArcSDE versions this presented a problem, but it works pretty well now.  After a layer is registered, ArcSDE does not look at the information in USER_SDO_GEOM_METADATA, so it is possible to alter the ArcSDE registration and have a different SRID associated with the table in ArcSDE than in Oracle - this is not recommended!
+</p><p>AutoRegistration is the process by which ArcSDE looks for new Oracle Spatial tables that have the correct structure and automatically registers them. This happens when ArcCatalog or ArcMap connect. It's recommended NOT to depend on auto-registration, but to explicitly register using the process listed above. AutoRegistration was on by default in ArcSDE8.x, but is off by default in ArcSDE9. Note that servers that were migrated from 8.x retain their old settings. See
+<a href="http://support.esri.com/index.cfm?fa=knowledgebase.techarticles.articleShow&d=20274|ESRI" class="external text" title="http://support.esri.com/index.cfm?fa=knowledgebase.techarticles.articleShow&amp;d=20274|ESRI" rel="nofollow">KnowledgeBase article 20274</a> for more information.
+</p><p>Specifying <i>USER</i> means that the OBJECTID column, known to ArcSDE as the <i>rowid</i> column, will be managed outside of ArcSDE. It is crucial that whatever column is specified as the rowid column contain a unique value for each row (feature) in the table.  User-maintained rowid columns are not expected to be editied via ESRI tools.
+</p><p>If one specifies a SDE-maintained rowid column, and it does not already exist, ArcSDE will create it for you.
+</p><p>^If you encounter the following error message:
+</p>
+<pre>   Error: Entry for SDE instance not found in services file (-102).
+   Error: Cannot get configuration information
+</pre>
+<p>It means that you don't have an entry like <i>esri_sde        5150/tcp</i> in your services file. You can work around this by adding <i>-i port:5150</i> as part of the command.^
+</p>
+<a name="Registering_as_a_SDE_Layer_vs._registering_with_the_Geodatabase_.28i.e._creating_a_Feature_Class.29"></a><h3> <span class="mw-headline"> Registering as a SDE Layer vs. registering with the Geodatabase (i.e. creating a Feature Class) </span></h3>
+<p>There is a distinction between an SDE Layer and a Feature Class even though they are both commonly referred to as "layers" and appear the same in ArcCatalog. A SDE Layer is simpler and can be managed through the use of the <i>sdelayer</i> command line tools. Creating a Feature Class or "registering with the geodatabase", can only be done using ArcCatalog. Reminder: Do not use <i>sdelayer</i> to delete a Feature Class - it will leave artifacts in the SDE repository!
+</p><p>We generally use SDE layers but there are a few cases where only a Feature Class will work. One such example is when the layer needs to participate in a ArcGIS Server WFS service.  There are some outstanding ESRI bugs with regard to registering an SDO_Geometry table or materialized view as a Feature Class, but the following procedure should work, assuming that you don't plan to modify the contents of the table via ESRI tools, but only via SQL.
+</p>
+<ul><li> insure the spatial table has an user_sdo_geom_metadata entry, spatial index, OBJECTID column populated w/ unique values
+</li><li> register the spatial table as an SDE Layer using <i>sdelayer</i>. You must specify the row_id_column as SDE-maintained, e.g. "<b>sdelayer -o register -C OBJECTID,SDE</b>" even though it's not.
+</li><li> register the SDE Layer with the geodatabase using ArcCatalog
+</li></ul>
+<p>In the case of materialized view, first drop the view from Oracle, then delete the Feature Class from ArcCatalog. You'll get an error the underlying datasource, but proceed anyway.
+</p><p>Note that if one attempts to register a SDE Layer with the geodatabase which has been created with a USER-maintained row_id_column, a second column will be added to the materialized view and an error will be thrown as SDE attempts to populate the new column.  If one attempts to directly register a SDO_GEOMETRY table without first creating an SDE Layer, a error will be thrown about the inability to read Abstract data types.
+</p>
+<a name="If_a_null_SRID_was_used_in_Oracle.2C_.22correct.22_the_SRID_in_the_SDE_metadata"></a><h3> <span class="mw-headline"> If a null SRID was used in Oracle, "correct" the SRID in the SDE metadata </span></h3>
+<pre>sdelayer -o alter -l POINT_TST,SHAPE -G 4326 -s sdehostname -u username -p
+</pre>
+<p>If the Oracle metadata has a value of NULL at the time the table is registered with SDE, SDE uses "UNKNOWN" for the spatial reference.  
+</p><p>This command allows the user to specify the "correct" spatial reference. In this example, it is being set to <b>WGS 1984</b>.
+</p><p>ESRI and Oracle use different codes and slightly different text descriptions for the various spatial references.
+</p><p>Now the same spatially-enabled table is accessible to Oracle spatial queries and ESRI clients. ESRI sees the data as geodetic, while Oracle sees them as cartesian.  This should not present any problems from ESRI's perspective since they only use the Oracle's SDO_FILTER procedure.  
+Consideration must be given however when using Oracle Spatial directly since the procedures will be assuming a "flat earth" and not measuring distances along a sphere.
+</p>
+<a name="grant_SELECT_privileges_to_the_SDE_VIEWER_role_so_other_users_can_see_the_table"></a><h3> <span class="mw-headline"> grant SELECT privileges to the SDE_VIEWER role so other users can see the table </span></h3>
+<pre>sdelayer -o grant -l POINT_TST,SHAPE -A select -U SDE_VIEWER ^
+-s sdehostname -u username -p
+</pre>
+<p>This step can also be performed from ArcCatalog by right-clicking the layername and choosing "Privileges...". Grant select privileges to the SDE_VIEWER role (user).  
+</p><p>Be aware that simply granting privileges to the table in Oracle will not allow it to work correctly via ESRI tools.
+</p><p><br>
+</p>
+<a name="Spatially-enable_an_existing_table_containing_columns_.22LONGITUDE.22_AND_.22LATITUDE.22"></a><h2> <span class="mw-headline"> Spatially-enable an existing table containing columns "LONGITUDE" AND "LATITUDE" </span></h2>
+<ol>
+   <li><b>add the <i>OBJECTID</i>,geometry columns to the table</b>
+      <pre>alter table point_tst add (OBJECTID NUMBER(38) unique, SHAPE MDSYS.SDO_GEOMETRY);
+      </pre>
+   </li>
+   <li><b>populate the newly-created columns</b>
+      <pre>update point_tst set OBJECTID = rownum;
+alter table point_tst modify (OBJECTID not null);
+update point_tst set SHAPE = 
+   MDSYS.SDO_GEOMETRY(
+      2001,
+      8307,
+      MDSYS.SDO_POINT_TYPE(LONGITUDE, LATITUDE, NULL),
+      NULL,
+      NULL
+   );  </pre>
+<p>The OBJECTID column needs to contain a unique integer value and the rowid pseudo-column is used to get those values.  After being populated, the <i>NOT NULL</i> constraint is applied to the column to satisfy SDE's requirements.</p>
+<p>The geometry object constructor is used just as above.  Note that here the SRID is specified as "8307" indicating geodetic data on the WGS84 datum.</p>
+   </li>
+   <li><b>populate the Oracle Spatial metadata for this table.  Insert a record into <i>USER_SDO_GEOM_METADATA</i></b>.    
+      <pre>insert into user_sdo_geom_metadata values (
+   'point_tst',
+   'SHAPE', 
+   MDSYS.SDO_DIM_ARRAY(
+      MDSYS.SDO_DIM_ELEMENT('Longitude',-180,180,0.005), 
+      MDSYS.SDO_DIM_ELEMENT('Latitude',-90,90,0.005)
+   ), 
+   8307
+);
+      </pre>
+<p>The first two fields in this record are the table name and the column holding the SDO_GEOMETRY value.</p>
+<p>The third field is an array object containing two dimension elements for the x and y dimensions respectively.</p>
+<p>The constructors for each of these contains the dimension name, minimum and maximum values, and the tolerance.</p>
+<p>Because the Geometry objects in the table are geodetic data, the ranges must be -180 to +180 for longitude and -90 to +90 for latitude.  Also in the case of geodetic data the tolerance is specified in meters, not decimal degrees.</p>
+<p>The last value in the insert statement is the SRID, and this needs to match the value specified in the MDSYS.SDO_GEOMETRY constructor in the previous step.</p> 
+   </li>
+   <li><b>create a spatial index on the geometry column</b>
+      <pre>create index point_tst_spatial_idx on point_tst(SHAPE) indextype is MDSYS.SPATIAL_INDEX;
+      </pre>
+<p>This builds a RTREE index on the geometry column. The index name is arbitrary.  You can find a list of spatial indexes and their types in the user_sdo_index_info view.</p>
+      <pre>                                                                                            
+select INDEX_NAME,TABLE_NAME,SDO_INDEX_TYPE from user_sdo_index_info;
+      </pre>
+   </li>
+<li><b>(optional) <a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialValidateLayer" title="SpatialValidateLayer">validate the geometry</a> in the table</b>
+At this point the table is spatially enabled and ready for use with SQL spatial queries. 
+</li>
+   <li><b>register the table with SDE, creating a "layer" accessible to ESRI clients (ArcMap, ArcIMS, etc.)</b>
+      <pre>
+sdelayer -o register -l POINT_TST,SHAPE -e p -C OBJECTID,USER -G 4326 ^
+-k SDO_WGS84 -s sdehostname -S "layer description" -u username -p 
+      </pre>
+<p>This registers the table with SDE, but not with the Geodatabase.  This however is all that is need to use the spatially-enabled table with ESRI clients.</p>  
+<p>If the Oracle metadata had a value of NULL at the time the table was registered with SDE, SDE uses "UNKNOWN" for the spatial reference.  The -G option in the 'sdelayer -o register' command allows the user to specify the correct spatial reference. In this example, it is being set to <i>WGS 1984</i> to match the Oracle geometries and spatial metadata.  The -k option in the 'sdelayer -o register' command allows the user to
+specify the sdo_geometry keyword.  In this example, it is being set to <i>SDO_WGS84</i>.</p>
+<p>A <a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook#Commonly-used_Oracle_and_ESRI_spatial_reference_identifier_values_.28SRIDs.29" title="SpatialCookbook">table of Oracle and ESRI spatial reference identifier values (SRIDs)</a> shows commonly-used values for geodetic data.  Note that the ESRI and Oracle use different codes and slightly different text descriptions for the various spatial references.</p>
+<p>Note that the ESRI and Oracle use different codes and slightly different text descriptions for the various spatial references.</p>
+<p>Now the same spatially-enabled table is accessible to Oracle spatial queries and ESRI clients.</p> 
+<p>If the data were spatially enabled in Oracle with a null SRID, ESRI sees the data as geodetic, while Oracle sees them as cartesian.  This should not present any problems from ESRI's perspective since they only use the Oracle's SDO_FILTER procedure.</p>  
+<p>Consideration must be given however when using Oracle Spatial directly since the procedures will be assuming a "flat earth" and not measuring distances along a sphere.</p> 
+   </li>
+   <li><b>grant SELECT privileges to the SDE_VIEWER role so other users can see the table</b>
+      <pre>sdelayer -o grant -l POINT_TST,SHAPE -A select -U SDE_VIEWER ^
+-s sdehostname -u username -p 
+      </pre>
+<p>This step can also be performed from ArcCatalog by right-clicking the layername and choosing "Privileges...". Be aware that simply granting privileges to the table in Oracle will not allow it to work correctly via ESRI tools.
+</p>
+   </li>
+</ol>
+<p><br>
+</p>
+<a name="Split_large_geodetic_polygons_at_the_prime-meridian"></a><h2> <span class="mw-headline"> Split large geodetic polygons at the prime-meridian </span></h2>
+<p>Oracle will not allow geodetic polygons to be larger than 1/2 the surface of the earth (<a href="http://download.oracle.com/docs/html/B14255_01/sdo_cs_concepts.htm#sthref560" class="external text" title="http://download.oracle.com/docs/html/B14255_01/sdo_cs_concepts.htm#sthref560" rel="nofollow">reference</a>).  The error returned in these cases is "<a href="http://download.oracle.com/docs/cd/B19306_01/server.102/b14219/e12700.htm" class="external text" title="http://download.oracle.com/docs/cd/B19306_01/server.102/b14219/e12700.htm" rel="nofollow">ORA-13367: polygon coords in wrong order</a>".  One way to accommodate this limitation is to break large simple polygons into multipart polgons. Note that Oracle will also not allow two parts of a multipart polygon to intersect (<a href="http://download.oracle.com/docs/cd/B19306_01/server.102/b14219/e12700.htm" class="external text" title="http://download.oracle.com/docs/cd/B19306_01/server.102/b14219/e12700.htm" rel="nofollow">ORA-13351</a>) so we introduce a very small gap between the parts.
+</p><p>Assuming a table POLY with columns MINX,MINY,MAXX,MAXY defining the corner points of rectangles, one can update the polygons with:
+</p>
+<pre>update POLY set shape =
+   MDSYS.SDO_GEOMETRY(
+      2007, -- 2D polygon
+      8307, -- SRID
+      NULL,
+      MDSYS.SDO_ELEM_INFO_ARRAY(1,1003,1, 11,1003,1),
+      MDSYS.SDO_ORDINATE_ARRAY(
+         MINX, MINY,
+         -0.0001, MINY,
+         -0.0001, maxY,
+         MINX, MAXY,
+         MINX, MINY,
+         0.0001, MINY,
+         MAXX, MINY,
+         MAXY, MAXY,
+         0.0001, MAXY,
+         0.0001, MINY
+      )
+   ) where  MAXX - MINX &gt; = 180
+</pre>
+<a name="Create_a_table.2C_insert_polygon_values.2C_register_with_Oracle_and_SDE"></a><h2> <span class="mw-headline"> Create a table, insert polygon values, register with Oracle and SDE </span></h2>
+<ol>
+   <li><b>create and populate the table</b>
+      <pre>create table POLY0 (OBJECTID number(38), SHAPE MDSYS.SDO_GEOMETRY);
+      </pre>
+   </li>
+   <li><b>insert a record into the table</b>
+      <pre>insert into POLY0 values (
+  1,
+  MDSYS.SDO_GEOMETRY(
+    2003, -- 2D polygon
+    8265, -- SRID
+    NULL,
+    MDSYS.SDO_ELEM_INFO_ARRAY(1,1003,1), -- one polygon (exterior)
+    MDSYS.SDO_ORDINATE_ARRAY(
+      0,-10,
+      10,0,
+      0,10,
+      -10,0,
+      0,-10
+    )
+  )
+);
+      </pre>
+<p>The "2003" is a SDO_GTYPE value indicating a 2D polygon. </p>
+<p>The "1003" code in the SDO_ELEM_INFO_ARRAY indicates a simple exterior polygon. </p> 
+<p>For exterior polygons, coordinate pairs should be listed in counter-clockwise order.</p> 
+<p>Points are listed as (X1,Y1,X2,Y2,X3,Y3...Xn,Yn) where X is longitude and Y is latitude.</p>
+<p>The first and last points should be identical to close the polygon.</p>
+   </li>
+   <li><b>populate the Oracle Spatial metadata for this table. Insert a record into <i>USER_SDO_GEOM_METADATA </i>.</b>
+   <pre>
+insert into user_sdo_geom_metadata values (
+   'POLY0',
+   'SHAPE',
+   MDSYS.SDO_DIM_ARRAY(
+      MDSYS.SDO_DIM_ELEMENT('Longitude',-180,180,0.5),
+      MDSYS.SDO_DIM_ELEMENT('Latitude',-90,90,0.5)
+   ),
+   8265
+);
+   </pre>
+<p>"8265" represents the SRID value</p>
+   </li>
+   <li><b>create a spatial index on the geometry column</b>
+   <pre>create index poly0_spatial_idx on poly0(SHAPE) indextype is MDSYS.SPATIAL_INDEX;
+   </pre>
+   </li>
+   <li><b>(optional) validate the geometry and SRIDs in the table</b></li>
+   <li><b>register with SDE. See steps 6-8 in Case 1.</b></li>
+</ol>
+<a name="Spatially-enable_an_existing_table_containing_columns_holding_corner_points"></a><h2> <span class="mw-headline"> Spatially-enable an existing table containing columns holding corner points </span></h2>
+<ol>
+   <li><b>add the <i>OBJECTID</i>,geometry columns to the table</b>
+      <pre>alter table poly_tst add (OBJECTID NUMBER(38), SHAPE MDSYS.SDO_GEOMETRY);
+      </pre>
+   </li>
+   <li><b>populate the newly-created columns</b>
+      <pre>update poly_tst set OBJECTID = rownum;
+alter table poly_tst modify (OBJECTID not null);
+update poly_tst set SHAPE =
+   MDSYS.SDO_GEOMETRY(
+      2003,
+      8307,
+      NULL,
+      MDSYS.SDO_ELEM_INFO_ARRAY(1,1003,1),
+      MDSYS.SDO_ORDINATE_ARRAY(minx,miny, maxx,miny, maxx,maxy, minx,maxy, minx,miny)
+   );
+      </pre>
+<p>The OBJECTID column needs to contain a unique integer value and the rowid pseudo-column is used to get those values.  After being populated, the <i>NOT NULL</i> constraint is applied to the column to satisfy SDE's requirements.</p>
+<p>The geometry object constructor is used just as above.  Note that here the SRID is specified as "8307" indicating geodetic data on the WGS84 datum.</p>
+   </li>
+   <li><b>populate the Oracle Spatial metadata for this table. Insert a record into USER_SDO_GEOM_METADATA</b>
+   </li>
+   <li><b>create a spatial index on the geometry column</b></li>
+   <li><b>(optional) validate the geometry in the table</b></li>
+   <li><b>register the table with SDE, creating a "layer" accessible to ESRI clients (ArcMap, ArcIMS, etc.)</b></li>
+   <li><b>grant SELECT privileges to the SDE_VIEWER role so other users can see the table</b></li>
+</ol>
+<a name="Create_a_table.2C_insert_line_values.2C_register_with_Oracle_and_SDE"></a><h2> <span class="mw-headline"> Create a table, insert line values, register with Oracle and SDE </span></h2>
+<ol>
+<li><b>create a table</b>
+<pre>create table line_test (
+   OBJECTID number(38), 
+   FROM_X number, FROM_Y number,
+   TO_X number, TO_Y number,
+   SHAPE MDSYS.SDO_GEOMETRY)
+</pre>
+</li>
+<li><b>insert a row</b>
+<pre>insert into line_test values (
+   1,-105,39,-103,40,sdo_geometry(
+    2002,   -- linestring
+    8307, --WGS84 SRID 
+    null,
+    sdo_elem_info_array(1,2,1),   --one line string, straight segment
+    sdo_ordinate_array(-105,39,-103,40)
+   ))
+</pre>
+</li>
+<li><b>insert metadata</b>
+<pre>insert into user_sdo_geom_metadata values ( 
+   'LINE_TEST',
+   'SHAPE',
+   SDO_DIM_ARRAY (
+      SDO_DIM_ELEMENT ('Longitude',-180,180,0.5),
+      SDO_DIM_ELEMENT('Latitude',-90,90,0.5)
+   ),
+   8307)
+</pre>
+</li>
+<li><b>build index</b>
+<pre>create index line_test_spidx on line_test(shape) indextype is MDSYS.SPATIAL_INDEX;
+</pre>
+</li>
+<li><b>validate</b>
+<pre>select objectid,sdo_geom.validate_geometry_with_context(l.shape,0.5) from line_test l;
+</pre>
+</li>
+</ol>
+<a name="Create_lines_from_a_point_table"></a><h2> <span class="mw-headline"> Create lines from a point table </span></h2>
+<p>Using a table of points with an "lineid" attribute, construct a series of lines, one per unique lineid.  This could probably be done all in SQL using Oracle's lag functions, but the python script below offers a simple alternative.
+</p><p>Point table VERTICES_TST:
+</p>
+<pre> Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ OBJECTID                                  NOT NULL NUMBER(38)
+ LINEID                                             NUMBER
+ SHAPE                                              MDSYS.SDO_GEOMETRY
+</pre>
+<p><br>
+Line table LINE_TST
+</p>
+<pre>Name                                      Null?    Type
+----------------------------------------- -------- ----------------------------
+OBJECTID                                  NOT NULL NUMBER(38)
+SHAPE                                              MDSYS.SDO_GEOMETRY
+</pre>
+<p><br>
+Python script
+</p>
+<pre>import cx_Oracle
+
+def buildInsertStatement(lineid,ordinates):
+  coordString = ", ".join(map(str,ordinates))
+  return  """
+insert into line_tst (objectid,shape) values (%s, sdo_geometry (
+  2002,
+  null,
+  null,
+  sdo_elem_info_array (1,2,1),
+  sdo_ordinate_array (%s))
+)"""&nbsp;% (lineid, coordString)
+
+connection = cx_Oracle.connect("myuser", "mypasswd", "mydb")
+
+cursor = connection.cursor()
+cursor.arraysize = 50
+#assume the order of the vertices in each line is defined by OBJECTID 
+cursor.execute("""
+       select
+          p.LINEID, p.SHAPE.SDO_POINT.X, p.SHAPE.SDO_POINT.Y
+       from
+          VERTICES_TST p
+       order by p.OBJECTID
+       """
+       )
+
+#initialize w/ first row of resultset
+row = cursor.fetchone()
+lineid = row[0]
+ordinates = list()
+ordinates.append(row[1]);
+ordinates.append(row[2]);
+
+for row in cursor.fetchall():
+  if (row[0] == lineid):
+     #append to existing line
+     ordinates.append(row[1]);
+     ordinates.append(row[2]);
+  else:
+     print buildInsertStatement(lineid, ordinates)
+     #create a  new line
+     lineid = row[0]
+     ordinates = list()
+     ordinates.append(row[1]);
+     ordinates.append(row[2]);
+
+#finish by inserting last line segment
+print buildInsertStatement(lineid, ordinates)
+</pre>
+<a name="Register_a_table_containing_multiple_spatial_columns"></a><h2> <span class="mw-headline"> Register a table containing multiple spatial columns </span></h2>
+<p>ArcSDE cannot register a table containing more than one spatial column.  To work around this, create one or more views based on the table each of which contains a single spatial column and the relevant attribute columns.  Register each view individually.
+See <a href="http://support.esri.com/index.cfm?fa=knowledgebase.techarticles.articleShow&d=31709" class="external text" title="http://support.esri.com/index.cfm?fa=knowledgebase.techarticles.articleShow&amp;d=31709" rel="nofollow">knowledge base article 31709</a> for details.
+</p>
+<a name="Register_a_table_whose_geometry_column_contains_multiple_geometry_types"></a><h2> <span class="mw-headline"> Register a table whose geometry column contains multiple geometry types </span></h2>
+<p>ArcSDE cannot register a table if the geometry column contains more than one geometry type, e.g. points and lines. To work around this, create one or more views based on the table each of which contains a single geometry type and the relevant attribute columns, e.g. 
+</p>
+<pre>CREATE or REPLACE VIEW POINT_VIEW 
+as 
+select * from EVENTS s where s.location.get_gtype() = 1
+</pre>
+<p>Then register each view individually. See <a href="http://support.esri.com/index.cfm?fa=knowledgebase.techarticles.articleShow&d=31709" class="external text" title="http://support.esri.com/index.cfm?fa=knowledgebase.techarticles.articleShow&amp;d=31709" rel="nofollow">knowledge base article 31709</a> for details.
+</p>
+<a name="Create_and_register_a_view"></a><h2> <span class="mw-headline"> Create and register a view </span></h2>
+<p>In previous ArcSDE versions registering Oracle views could be problematic and the use of sdetable to create the view was encouraged.  Now Oracle views are better supported, and the general recommendation is to create the view in Oracle and then register w/ sdelayer.
+</p><p>Using this approach:
+</p>
+<ul><li> insure that at least one of the underlying tables contains a SDO_GEOMETRY column, entry in user_sdo_geom_metadata, and spatial index
+</li><li> create the view in Oracle in the standard way, and add entry into user_sdo_geom_metadata
+</li><li> register the view w/ ArcSDE using "sdelayer -o register" just like you would w/ any oracle Spatial table
+</li></ul>
+<p>Insure that the join columns are primary keys or you may see an error like this:
+</p>
+<pre>SQL&gt; exec sdo_geom.validate_layer_with_context('AERO_HIRES_VSQL','SHAPE','HIRES_VAL');
+BEGIN sdo_geom.validate_layer_with_context('AERO_HIRES_VSQL','SHAPE','HIRES_VAL'); END;
+
+
+ERROR at line 1:
+ORA-29400: data cartridge error
+ORA-01009: missing mandatory parameter
+ORA-29400: data cartridge error
+ORA-01445: cannot select ROWID from, or sample, a join view without a key-preserved table
+ORA-29400: data cartridge error
+ORA-01445: cannot select ROWID from, or sample, a join view without a key-preserved table
+ORA-06512: at "MDSYS.SDO_3GL", line 1380
+ORA-06512: at "MDSYS.SDO_GEOM", line 3797
+ORA-06512: at line 1
+</pre>
+<p>Adding a primary_key constraint should resolve the issue.
+</p><p><br>
+Alternatively, use sdetable which creates an oracle view, populates the user_sdo_geom_metadata table, and registers with ArcSDE all in one command. The assumption is that the spatial table used in the view definition has already been registered w/ ArcSDE.
+</p>
+<pre>sdetable -o create_view -T view1 -t cities -c objectid,city_name,cntry_name,shape ^ 
+-s cheetah.ngdc.noaa.gov -u username -p password
+</pre>
+<p>-T the view name
+-t comma-separated list of tables to be used in view
+-c comma-separated list of columns
+<a href="http://edndoc.esri.com/arcsde/9.1/admin_cmd_refs/sdetable.htm%7Csdetable" class="external text" title="http://edndoc.esri.com/arcsde/9.1/admin_cmd_refs/sdetable.htm|sdetable" rel="nofollow">man page</a>
+</p><p><br>
+A potential performance increase can be realized by using a materialized view in place of a standard view. Materialized views are treated as tables by ArcSDE and registered with sdelayer.  Note that materialized views should only be used with "simple" view definitions to avoid problems filling up the oracle logs. Specifying "fast refresh on commit" when defining the materialized view will warn if a complex view is attempted.
+</p><p>see also ((OracleViewsAndArcSDE|notes)) on testing of views.
+</p><p><br>
+The following notes are only applicable to older ArcSDE versions and should no longer be necessary nor recommended
+</p><p>For at least some complex views, there is no way to define the view using sdetable. Two approaches are possible here (
+Note that creating an Oracle view and subsequently registering it does not work):
+</p><p>Preferred approach:
+1) create the new view as a table in Oracle (Use create table)
+2) add the spatial metadata and spatial index in Oracle
+3) register the table in SDE
+4) drop the table in Oracle
+5) create the view in Oracle (with the same definition as in step 1, but use create view)
+</p><p>Also see more explanation ((CreateSpatialView|here)), including examples.
+Another example shows the creation of a spatial view for ((WfabbaSDEViewCreate|Fires WFABBA)) data.
+</p><p>---
+A second alternative is the  "trivial view" approach:
+1) use sdetable to create a simple view containing the row_id_column (by convention named "OBJECTID"), and the SDO_GEOMETRY column (by convention named "SHAPE").
+</p><p>this should produce a ArcSDE layer visible in ArcCatalog, etc. Make sure to grant the appropriate permissions.
+</p><p>2) via SQL, alter the  view definition for the view created in step 1. No change in the ArcSDE registration should be necessary.
+</p><p><br>
+Here is an old article that describes altering the view registration to define a row_id_column. This does not seem to be necessary any longer and is not recommended.
+<a href="http://support.esri.com/index.cfm?fa=knowledgebase.techarticles.articleShow&d=20867|ESRI" class="external text" title="http://support.esri.com/index.cfm?fa=knowledgebase.techarticles.articleShow&amp;d=20867|ESRI" rel="nofollow">KnowledgeBase article 20867</a>
+</p>
+<a name="Modify_the_SRID_of_a_table_that_is_already_registered_with_SDE"></a><h2> <span class="mw-headline"> <a href="https://www.ngdc.noaa.gov/wiki/index.php?title=ModifySrid" title="ModifySrid">Modify the SRID of a table that is already registered with SDE</a> </span></h2>
+<a name="Create_a_spatial_table_using_shp2sde"></a><h2> <span class="mw-headline"> Create a spatial table using shp2sde </span></h2>
+<p><a href="https://gdsg.ngdc.noaa.gov/tiki/tiki-index.php?page=Shp2Sde" class="external text" title="https://gdsg.ngdc.noaa.gov/tiki/tiki-index.php?page=Shp2Sde" rel="nofollow">original tiki page</a>
+</p>
+<pre>shp2sde -o create -l POINTS_TSQP,SHAPE -f shape_file -S "layer_description" -e p -k SDO_GEOMETRY -a all -s database -u user_name -p
+</pre>
+<p>Also see: <a href="http://edndoc.esri.com/arcsde/9.1/admin_cmd_refs/shp2sde.htm" class="external free" title="http://edndoc.esri.com/arcsde/9.1/admin_cmd_refs/shp2sde.htm" rel="nofollow">http://edndoc.esri.com/arcsde/9.1/admin_cmd_refs/shp2sde.htm</a>
+</p>
+ shp2sde -o create -l  -f &lt;shape_file&gt; -I
+ Spatial_Index [Spatial_Ref_Opts}]
+ -S &lt;layer_description_str&gt; -v OFF} 64}
+ -e &lt;entity_mask&gt; -k &lt;config_keyword&gt; -M &lt;minimum_ID&gt;
+ all -r &lt;reject_shpfile&gt;
+ -V &lt;version_name&gt; [-C &lt;row_id_column&gt; USER},&lt;min_ID&gt;]
+ -c &lt;commit_interval&gt; -i &lt;service&gt; -s &lt;server_name&gt;
+ -D &lt;database&gt; -u &lt;DB_User_name&gt; -p &lt;DB_User_password&gt;
+
+ -k configuration keywords (NGDC specific):
+ SDO_GEOMETRY
+ SDO_WGS84
+ SDO_NAD83
+
+<a name="Restricting_invalid_geometries_from_table"></a><h2> <span class="mw-headline"> <a href="https://www.ngdc.noaa.gov/wiki/index.php?title=OracleSpatialRestrictBadData" title="OracleSpatialRestrictBadData">Restricting invalid geometries from table</a> </span></h2><a name="Oracle_SDO_GTYPE_.2F_ESRI_Entity_Type_Comparison"></a><h2> <span class="mw-headline"> Oracle SDO_GTYPE / ESRI Entity Type Comparison </span></h2><table>
+
+</table><table border="1" cellpadding="2" cellspacing="2">
+<tbody><tr><th></th><th>Oracle</th><th>ESRI</th><th>Informix</th></tr>
+<tr align="center"><td>Point</td><td>2001</td><td>p</td><td>ST_Point</td></tr>
+<tr align="center"><td>Line</td><td>2002</td><td>l</td><td>ST_LineString</td></tr>
+<tr align="center"><td>Spaghetti Line (self-crossing)</td><td></td><td>s</td><td></td></tr>
+<tr align="center"><td>Polygon</td><td>2003</td><td>a</td><td>ST_Polygon</td></tr>
+<tr align="center"><td>Multipart Point</td><td>2005</td><td>p+</td><td>ST_MultiPoint</td></tr>
+<tr align="center"><td>Multipart Line</td><td>2006</td><td>l+</td><td>ST_MultiLineString</td></tr>
+<tr align="center"><td>Multipart Spaghetti Line (self-crossing)</td><td></td><td>s+</td><td></td></tr>
+<tr align="center"><td>Multipart Polygon</td><td>2007</td><td>a+</td><td>ST_MultiPolygon</td></tr>
+</tbody></table>
+<a name="Commonly-used_Oracle_and_ESRI_spatial_reference_identifier_values_.28SRIDs.29"></a><h2> <span class="mw-headline"> Commonly-used Oracle and ESRI spatial reference identifier values (SRIDs) </span></h2>
+<p><i>from the oracle manual:</i>
+Geodetic coordinates (sometimes called geographic coordinates) are angular coordinates (longitude and latitude), closely related to spherical polar coordinates, and are defined relative to a particular Earth geodetic datum. (A geodetic datum is a means of representing the figure of the Earth and is the reference for the system of geodetic coordinates.)^
+The complete list of ESRI codes can be found <a href="http://edndoc.esri.com/arcsde/9.1/capi_functions/include_files/pedef.htm%7Cpdef.htm" class="external autonumber" title="http://edndoc.esri.com/arcsde/9.1/capi_functions/include_files/pedef.htm|pdef.htm" rel="nofollow">[1]</a> The complete list of Oracle SRIDs can be found in the <i>MDSYS.CS_SRS</i> table
+</p>
+<pre>select CS_NAME,SRID from  MDSYS.CS_SRS</pre>
+<table border="1" cellpadding="2" cellspacing="2">
+<tbody><tr><th></th><th>Oracle</th><th>ESRI</th></tr>
+<tr align="center"><td>Geodetic WGS84</td><td>8307</td><td>4326</td></tr>
+<tr align="center"><td>Geodetic NAD83</td><td>8265</td><td>4269</td></tr>
+<tr align="center"><td>Geodetic NAD27</td><td>8260</td><td>4267</td></tr>
+</tbody></table>
+<a name="NGDC_Spatial_Table__and_View_Naming_Conventions"></a><h2> <span class="mw-headline"> NGDC Spatial Table  and View Naming Conventions </span></h2>
+<p>Spatial tables should be named with a base name of 20 characters or less and an informative 5-character suffix (including a leading underscore) that gives some details about the contents of the spatial table. Adhering to this convention ensures that there is a bit of additional space for suffixes to create index, trigger, and sequence names that refer to the table.
+</p><p><b>basename</b>_<i><b>1234</b></i>
+</p>
+<ol><li> Table or View: "<b>t</b>" for <b>T</b>able, "<b>v</b>" for <b>V</b>iew, "<b>m</b>" for <b>M</b>aterialized view or "<b>s</b>" for <b>S</b>napshot
+<ul><li>'<i>snapshot tables must have the exact same name as the source view with the exception of <b>s</b> in the extension instead of <b>v</b></i>
+</li></ul>
+</li><li> Name of spatial column: "<b>s</b>" for "<b>s</b>hape"  <font color="#009900">(almost all our tables use "shape")</font>, "<b>g</b>" for "<b>g</b>eometry", "<b>o</b>" for <b>o</b>ther
+</li><li> Type of the spatial column: "<b>b</b>" for <b>B</b>inary, "<b>n</b>" for <b>N</b>ormalized, "<b>w</b>" for <b>W</b>ell-known binary, "<b>q</b>" for Oracle SDO_GEOMETRY <font color="#009900">(this is the most common)</font>, "<b>i</b>" for <b>I</b>nformix spatial, "<b>h</b>" for Informix Geodetic <i>DataBlade</i> (<b>H</b>ipparchus based), "<b>r</b>" for Informix Grid <i>DataBlade</i> (<b>R</b>aster)
+</li><li> Geometry described by the spatial column: "<b>p</b>" for <b>P</b>oint, "<b>l</b>" for <b>L</b>ine, "<b>a</b>" for <b>A</b>rea (polygon), and "<b>m</b>" for <b>M</b>ultiple <font color="#009900">(multiple spatial types exist within the table)</font>
+</li></ol>
+<a name="System_Units_.28affecting_feature_validity.29"></a><h2> <span class="mw-headline"> System Units (affecting feature validity) </span></h2>
+<p>TODO need to verify
+</p>
+<ul><li>registering w/ ArcCatalog automatically generates extents and system units. We are unable to intervene.
+</li><li>the system units, extents do not affect the actual storage of the data in Oracle, but do affect the data as seen by ESRI clients.
+</li><li>the system units affect the precision with which ESRI clients see these coordinates and thus can affect the validity of features.
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 220/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key ngdcwikidb:pcache:idhash:1367-0!1!0!!en!2!edit=0 and timestamp 20141001092956 -->
+<div class="printfooter">
+Retrieved from "<a href="http://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook">http://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook</a>"</div>
+						<!-- end content -->
+			<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+	
+				 <li id="ca-nstab-main" class="selected"><a href="./SpatialCookbook - NGDCWiki_files/SpatialCookbook - NGDCWiki.htm" title="View the content page [alt-c]" accesskey="c">Page</a></li>
+				 <li id="ca-talk" class="new"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=Talk:SpatialCookbook&action=edit" title="Discussion about the content page [alt-t]" accesskey="t">Discussion</a></li>
+				 <li id="ca-viewsource"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook&action=edit" title="This page is protected.
+You can view its source. [alt-e]" accesskey="e">View source</a></li>
+				 <li id="ca-history"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook&action=history" title="Past versions of this page. [alt-h]" accesskey="h">History</a></li>			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-anonuserpage"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=User:140.172.184.245" title="The user page for the ip you&#39;re editing as [alt-.]" accesskey="." class="new">140.172.184.245</a></li>
+				<li id="pt-anontalk"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=User_talk:140.172.184.245" title="Discussion about edits from this ip address [alt-n]" accesskey="n" class="new">Talk for this IP</a></li>
+				<li id="pt-anonlogin"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=Special:UserLogin&returnto=SpatialCookbook" title="You are encouraged to log in, it is not mandatory however. [alt-o]" accesskey="o">Log in</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(https://www.ngdc.noaa.gov/image/noaa_logo_wiki.png);" href="https://www.ngdc.noaa.gov/wiki/index.php?title=Main_Page" title="Visit the Main Page [alt-z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="generated-sidebar portlet" id="p-navigation">
+		<h5>Navigation</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-mainpage"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=Main_Page" title="Visit the Main Page [alt-z]" accesskey="z">Main Page</a></li>
+				<li id="n-NGDC-Home"><a href="http://www.ngdc.noaa.gov/">NGDC Home</a></li>
+				<li id="n-Contact-NGDC"><a href="http://www.ngdc.noaa.gov/ngdcinfo/phone.html">Contact NGDC</a></li>
+				<li id="n-Categories"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=Special:Categories">Categories</a></li>
+				<li id="n-recentchanges"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=Special:RecentChanges" title="The list of recent changes in the wiki. [alt-r]" accesskey="r">Recent changes</a></li>
+				<li id="n-help"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=Help:Contents" title="The place to find out.">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="https://www.ngdc.noaa.gov/wiki/index.php?title=Special:Search" id="searchform"><div>
+				<input id="searchInput" name="search" type="text" title="Search NGDCWiki [alt-f]" accesskey="f" value="">
+				<input type="submit" name="go" class="searchButton" id="searchGoButton" value="Go" title="Go to a page with this exact name if exists">&nbsp;
+				<input type="submit" name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search the pages for this text">
+			</div></form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=Special:WhatLinksHere/SpatialCookbook" title="List of all wiki pages that link here [alt-j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=Special:RecentChangesLinked/SpatialCookbook" title="Recent changes in pages linked from this page [alt-k]" accesskey="k">Related changes</a></li>
+<li id="t-upload"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=Special:Upload" title="Upload files [alt-u]" accesskey="u">Upload file</a></li>
+<li id="t-specialpages"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=Special:SpecialPages" title="List of all special pages [alt-q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook&printable=yes" title="Printable version of this page [alt-p]" accesskey="p">Printable version</a></li>				<li id="t-permalink"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=SpatialCookbook&oldid=5091" title="Permanent link to this version of the page">Permanent link</a></li>			</ul>
+		</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="./SpatialCookbook - NGDCWiki_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki"></a></div>
+			<ul id="f-list">
+				<li id="lastmod"> This page was last modified on 2 September 2014, at 13:05.</li>
+				<li id="privacy"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=NGDCWiki:Privacy_policy" title="NGDCWiki:Privacy policy">Privacy policy</a></li>
+				<li id="about"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=NGDCWiki:About" title="NGDCWiki:About">About NGDCWiki</a></li>
+				<li id="disclaimer"><a href="https://www.ngdc.noaa.gov/wiki/index.php?title=NGDCWiki:General_disclaimer" title="NGDCWiki:General disclaimer">Disclaimers</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served in 0.157 secs. --><script type="text/javascript">if (window.parent == window) {var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-33523145-1']);_gaq.push(['_setDomainName', 'www.ngdc.noaa.gov']);_gaq.push(['_setAllowLinker', true]);_gaq.push(['_trackPageview']);(function() {var ga = document.createElement('script'); ga.type = 'text/javascript';ga.async = true;ga.src = 'http://www.google-analytics.com/ga.js';var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga, s);})();}</script>
+</body></html>

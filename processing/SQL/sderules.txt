@@ -1,0 +1,7 @@
+Rules of SDE:
+
+1. Always test in test...environments
+2. Locks are there for a reason
+3. Never underestimate the power of well-maintained indexes and statistics
+4. Selects should always come before deletes
+5. Simpler is always better...and usually faster
